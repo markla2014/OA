@@ -19,7 +19,10 @@ public class DepartmentServiceImpl extends BaseDaoImpl<Department> implements De
 	@Override
 	public List findChildList(long id) {
 		// TODO Auto-generated method stub
-		return getSession().createQuery("from Department where id=?").setParameter(0,id).list();
+		return getSession().createQuery(//
+				"FROM Department d WHERE d.parent.id=?")//
+				.setParameter(0,id)//
+				.list();
 	}
 
 	 

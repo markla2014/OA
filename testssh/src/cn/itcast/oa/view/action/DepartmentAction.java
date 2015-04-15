@@ -17,10 +17,11 @@ public class DepartmentAction extends BaseAction<Department> {
 	/** 列表 */
 	public String list() throws Exception {
 		List departmentList=null;
+	
 		if(parentId==null){
 			departmentList=departmentService.findTopList();
 		}else{
-			departmentList=departmentService.findChildList(model.getId());
+			departmentList=departmentService.findChildList(parentId);
 		}
 		ActionContext.getContext().put("departmentList", departmentList);
 		return "list";
@@ -31,6 +32,7 @@ public class DepartmentAction extends BaseAction<Department> {
 		departmentService.delete(model.getId());
 		return "toList";
 	}
+
 
 	public Long getParentId() {
 		return parentId;

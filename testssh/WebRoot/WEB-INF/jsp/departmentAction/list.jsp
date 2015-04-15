@@ -34,7 +34,7 @@
         
         <s:iterator value="#departmentList">
 			<tr class="TableDetail1 template">
-				<td><s:a action="departmentAction_delete?parntId=%{id}">${name}&nbsp;</s:a></td>
+				<td><s:a action="departmentAction_list?parentId=%{id}">${name}&nbsp;</s:a></td>
 				<td>${parent.name}&nbsp;</td>
 				<td>${description}&nbsp;</td>
 				<td>
