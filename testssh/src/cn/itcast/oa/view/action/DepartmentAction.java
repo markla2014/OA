@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 
 import cn.itcast.oa.base.BaseAction;
 import cn.itcast.oa.domain.Department;
+import cn.itcast.oa.util.DepartmentUtil;
 
 import com.opensymphony.xwork2.ActionContext;
 
@@ -44,7 +45,8 @@ public class DepartmentAction extends BaseAction<Department> {
 
 	/** 添加页面 */
 	public String addUI() throws Exception {
-		List<Department> departmentList = departmentService.findAll();
+		List<Department> test=departmentService.findTopList();
+		List<Department> departmentList =DepartmentUtil.getAllDepartment(test);
 		ActionContext.getContext().put("departmentList", departmentList);
 		return "saveUI"; 
 	}
@@ -61,7 +63,7 @@ public class DepartmentAction extends BaseAction<Department> {
 	/** 修改页面 */
 	public String editUI() throws Exception {
 		// 准备回显的信息
-		List<Department> departmentList = departmentService.findAll();
+		List<Department> departmentList =DepartmentUtil.getAllDepartment(departmentService.findTopList());
 		ActionContext.getContext().put("departmentList", departmentList);
 		 long test=model.getId();
 		Department department = departmentService.getById(test);
