@@ -1,5 +1,7 @@
+/.struts.mex
 /applicationContext.xml
-/cn/
+/cn
 /hibernate.cfg.xml
 /jdbc.properties
 /log4j.properties
+/struts.xml
