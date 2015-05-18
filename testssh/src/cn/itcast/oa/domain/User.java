@@ -20,6 +20,16 @@ public class User {
 	private String phoneNumber; // 电话号码
 	private String email; // 电子邮件
 	private String description; // 说明
+     private Set<Privilege> privileges=new HashSet<Privilege>();
+     
+
+	public Set<Privilege> getPrivileges() {
+		return privileges;
+	}
+
+	public void setPrivileges(Set<Privilege> privileges) {
+		this.privileges = privileges;
+	}
 
 	public Long getId() {
 		return id;

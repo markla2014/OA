@@ -18,14 +18,18 @@
 		<property name="description"/>
 		
 		<!-- department属性，本类与Department的多对一 -->
-		<many-to-one name="department" class="Department" column="departmentId"></many-to-one>
+	 <many-to-one name="department" class="Department" column="departmentId"></many-to-one>
 
 		<!-- roles属性，本类与Role的多对多 -->
 		<set name="roles" table="itcast_user_role">
 			<key column="userId"></key>
-			<many-to-many class="Role" column="roleId"></many-to-many>
+			<many-to-many class="Role" column="roleId" lazy="false"></many-to-many>
 		</set>
-		
+		<!-- proleges 属性 -->
+		<set name="privileges" table="itcast_role_privilege" lazy="false">
+		<key column="roleId"></key>
+		<many-to-many class="Privilege" column="privilegeId"></many-to-many>
+		</set>
 	</class>
 	
 </hibernate-mapping>
