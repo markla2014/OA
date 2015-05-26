@@ -4,16 +4,16 @@
 <title>配置权限</title>
 <%@ include file="/WEB-INF/jsp/public/common.jspf"%>
 <script language="javascript"
-	src="${pageContext.request.contextPath}/scrip/jquery_treeview/jquery.treeview.js/"></script>
+	src="${pageContext.request.contextPath}/script/jquery_treeview/jquery.treeview.js"></script>
+<link type="text/css" rel="stylesheet"
+	href="${pageContext.request.contextPath}/style/blue/file.css" />
+<link type="text/css" rel="stylesheet"
+	href="${pageContext.request.contextPath}/script/jquery_treeview/jquery.treeview.css" />
 <link type="text/css" rel="stylesheet"
 	href="${pageContext.request.contextPath }/style/blue/file.css" />
 <link type="test/css" rel="stylesheet"
 	href="${pageContext.request.contextPath}/script/jquery_treeview/jquery.treeview.css" />
-<script type="text/javascript">
-	$(function() {
-		${"#root"}.treeview();
-	})
-</script>
+
 </head>
 <body>
 
@@ -59,7 +59,7 @@
 								$('[name=privilegeIds]').attr('checked', this.checked)
 								--> <input type="checkbox"
 									onClick="$('[name=privilegeIds]').attr('checked', this.checked)" />
-								<!--  --> <label for="cbSelectAll">全选</label>
+									<!--  --> <label for="cbSelectAll">全选</label>
 								</td>
 							</tr>
 						</thead>
@@ -78,32 +78,33 @@
 	><!-- 判断是否选择的id 已经加入了privileges 中如果是 -->
 	<label for="cb_${id}">${name}</label>
 	<br/>
-</s:iterator> --%>
-									<ul id="root">
-										<s:iterator value="#privilegeList">
-											<li><input type="checkbox" name="privilegeIds"
-												value="${id}" id="cb_${id}"
-												<s:property value="%{id in privilegeIds ? 'checked' : ''}"/>>
-											<label for="cb_${id}"><span class="folder">${name}</span></label>
-												<ul>
-													<s:iterator value="children">
-														<li><input type="checkbox" name="privilegeIds"
-															value="${id}" id="cb_${id}"
-															<s:property value="%{id in privilegeIds ? 'checked' : ''}"/>>
-															<label for="cb_${id}"><span class="folder">${name}</span></label>
-															<ul>
-																<s:iterator value="children">
-																	<li><input type="checkbox" name="privilegeIds"
-																		value="${id}" id="cb_${id}"
-																		<s:property value="%{id in privilegeIds ? 'checked' : ''}"/>>
-																		<label for="cb_${id}"><span class="folder">${name}</span></label></li>
-																</s:iterator>
-															</ul></li>
-													</s:iterator>
-												</ul></li>
-										</s:iterator>
-									</ul>
-
+</s:iterator> --%><ul id="root">
+<%-- 第一级 --%>
+<s:iterator value="#privilegeList">
+	<li>
+		<input type="checkbox" name="privilegeIds" value="${id}" id="cb_${id}" <s:property value="%{id in privilegeIds ? 'checked' : ''}"/> >
+		<label for="cb_${id}"><span class="folder">${name}</span></label>
+		<ul>
+		<%-- 第二级 --%>
+		<s:iterator value="children">
+			<li>
+				<input type="checkbox" name="privilegeIds" value="${id}" id="cb_${id}" <s:property value="%{id in privilegeIds ? 'checked' : ''}"/> >
+				<label for="cb_${id}"><span class="folder">${name}</span></label>
+				<ul>
+				<%-- 第三级 --%>
+				<s:iterator value="children">
+					<li>
+						<input type="checkbox" name="privilegeIds" value="${id}" id="cb_${id}" <s:property value="%{id in privilegeIds ? 'checked' : ''}"/> >
+						<label for="cb_${id}"><span class="folder">${name}</span></label>
+					</li>
+				</s:iterator>
+				</ul>
+			</li>
+		</s:iterator>
+		</ul>
+	</li>
+</s:iterator>
+</ul>
 
 
 								</td>
@@ -112,12 +113,16 @@
 					</table>
 				</div>
 			</div>
-
+			<script type="text/javascript">
+				$(function() {
+					$("#root").treeview();
+				});
+			</script>
 			<!-- 表单操作 -->
 			<div id="InputDetailBar">
 				<input type="image"
-					src="${pageContext.request.contextPath}/style/images/save.png" /> <a
-					href="javascript:history.go(-1);"><img
+					src="${pageContext.request.contextPath}/style/images/save.png" />
+				<a href="javascript:history.go(-1);"><img
 					src="${pageContext.request.contextPath}/style/images/goBack.png" /></a>
 			</div>
 		</s:form>
