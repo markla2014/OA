@@ -95,7 +95,7 @@ public void setPrivilegeIds(Long[] privilegeIds) {
 	public String editPrivilegeUI() throws Exception {
 		Role role=roleService.getById(model.getId());
 		ActionContext.getContext().put("role",role);
-		List<Privilege> privilegeList=privilegeService.findAll();
+		List<Privilege> privilegeList=privilegeService.findTopList();
    ActionContext.getContext().put("privilegeList",privilegeList);
   Long[] PrivilegeTemp=new Long[role.getPrivileges().size()];
    int i=0;
