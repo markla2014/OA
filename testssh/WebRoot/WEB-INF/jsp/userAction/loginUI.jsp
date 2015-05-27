@@ -23,7 +23,7 @@
 
 
 <!-- 显示表单 -->
-<s:form action="userAction_login" focusElement="loginNameInput">
+<s:form action="userAction_login" ><!-- focusElement="loginNameInput" -->
     <div id="CenterAreaBg"> 
         <div id="CenterArea">
             <div id="LogoImg"><img border="0" src="${pageContext.request.contextPath}/style/blue/images/logo.png" /></div>
