@@ -134,7 +134,34 @@ public class UserAction extends BaseAction<User> {
 
 		return "toList";
 	}
-
+	/**
+	 * 登陆界面
+	 * @return
+	 * @throws Exception
+	 */
+	public String loginUI() throws Exception {
+      
+		return "loginUI";
+	}
+  //登陆
+	public String login() throws Exception {
+        User user=userService.getByloginNameAndPassword(model.getLoginName(),model.getPassword());
+       
+		if(user==null){
+			 //国际化，配置国际文件 addFieldError("login",getText"login.error");
+			addFieldError("login","login.error");
+			return "loginUI";
+		}else{
+			ActionContext.getContext().getSession().put("user",user);
+			return "toIndex";
+		}
+		}
+		
+	//注销
+	public String logout() throws Exception {
+    ActionContext.getContext().getSession().remove("user");
+		return "logout";
+	}
 	// -------
 
 	public Long getDepartmentId() {

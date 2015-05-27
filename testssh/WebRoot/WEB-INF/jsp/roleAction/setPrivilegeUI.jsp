@@ -6,15 +6,36 @@
 <script language="javascript"
 	src="${pageContext.request.contextPath}/script/jquery_treeview/jquery.treeview.js"></script>
 <link type="text/css" rel="stylesheet"
-	href="${pageContext.request.contextPath}/style/blue/file.css" />
-<link type="text/css" rel="stylesheet"
-	href="${pageContext.request.contextPath}/script/jquery_treeview/jquery.treeview.css" />
-<link type="text/css" rel="stylesheet"
 	href="${pageContext.request.contextPath }/style/blue/file.css" />
 <link type="test/css" rel="stylesheet"
 	href="${pageContext.request.contextPath}/script/jquery_treeview/jquery.treeview.css" />
 
 </head>
+<script type="text/javascript">
+ $(function(){
+ //给权限复选框添加事件
+ $("[name=privilegeIds]").click(function(){
+ //把所有下级权限同时选中或者
+ //this represent which you have been inpress 
+
+ $(this).siblings("ul").find("input").attr("checked",this.checked);
+ if(this.checked){
+ $(this).parents("li").children("input").attr("checked",this.checked);
+ }//取消一个权限时，同时取消上级同级没有其他
+ else{
+    if($(this).parent().siblings("li").children("input:checked").size()==0){
+     $(this).parent().parent().siblings("input").attr("checked",false);
+    }
+    var start=$(this).parent();
+    if(start.parent().siblings("li").children("input:checked").size()==0){
+    start.parent().parent().siblings("input").attr("checked",false);
+    }
+    
+ }
+ });
+ 
+ });
+</script>
 <body>
 
 	<!-- 标题显示 -->
