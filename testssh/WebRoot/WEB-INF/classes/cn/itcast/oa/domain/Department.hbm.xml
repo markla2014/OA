@@ -5,7 +5,7 @@
 
 <hibernate-mapping package="cn.itcast.oa.domain">
 
-	<class name="Department" table="itcast_department">
+	<class name="Department" table="itcast_department" lazy="false">
 		<id name="id">
 			<generator class="native" />
 		</id>
@@ -13,7 +13,7 @@
 		<property name="description" />
 
 		<!-- users属性，本类与User的一对多 -->
-		<set name="users" lazy="false">
+		<set name="users">
 			<key column="departmentId"></key>
 			<one-to-many class="User" />
 		</set>

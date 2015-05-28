@@ -5,7 +5,7 @@
 
 <struts>
 	<!-- 配置为开发模式 -->
-    <constant name="struts.devMode" value="true" />
+    <constant name="struts.devMode" value="false" />
 	<!-- 配置扩展名为action -->
     <constant name="struts.action.extension" value="action" />
     <!-- 配置主题 -->
@@ -49,7 +49,13 @@
 			<result name="logout">/WEB-INF/jsp/userAction/logout.jsp</result>
 			<result name="toIndex" type="redirect">/index.jsp</result>
 		</action>
-		
+		<action name="homeAction_*" class="homeAction" method="{1}">
+			<result name="index">/WEB-INF/jsp/homeAction/index.jsp</result>
+			<result name="top">/WEB-INF/jsp/homeAction/top.jsp</result>
+			<result name="left">/WEB-INF/jsp/homeAction/left.jsp</result>
+			<result name="right">/WEB-INF/jsp/homeAction/right.jsp</result>
+			<result name="bottom">/WEB-INF/jsp/homeAction/bottom.jsp</result>
+		</action>
 
     </package>
 
