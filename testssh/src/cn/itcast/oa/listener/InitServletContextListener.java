@@ -30,7 +30,10 @@ public class InitServletContextListener implements ServletContextListener {
 		application.setAttribute("topPrivilegeList", topPrivilegeList);
 		//logger.info("已经准备好初始菜单");
 		System.out.println("准备好了");
-		
+		//准备所有权限url 的集合
+	  List<String> allPrivilegeUrls=privilegeService.getAllPrivileges();
+	  application.setAttribute("allPrivilegeUrls", allPrivilegeUrls);
+	  System.out.println("准备好所有的数据");
 		// TODO Auto-generated method stub
 		
 	}

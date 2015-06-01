@@ -11,4 +11,6 @@ public interface PrivilegeService extends BaseDao<Privilege> {
 
 	List<Privilege> findTopList();
 
+	List<String> getAllPrivileges();
+
 }

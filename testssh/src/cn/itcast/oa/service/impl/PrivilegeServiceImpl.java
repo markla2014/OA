@@ -16,4 +16,9 @@ public class PrivilegeServiceImpl extends BaseDaoImpl<Privilege>implements Privi
 		return getSession().createQuery("from Privilege p where p.parent is NuLL").list();
 	}
 
+	@Override
+	public List<String> getAllPrivileges() {
+		return getSession().createQuery("select distinct p.url from Privilege p where p.url is not null ").list();
+	}
+
 }

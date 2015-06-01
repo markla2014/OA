@@ -1,5 +1,6 @@
 package cn.itcast.oa.domain;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -9,7 +10,7 @@ import java.util.Set;
  * @author tyg
  * 
  */
-public class Department {
+public class Department implements Serializable {
 	private Long id;
 	private Set<User> users = new HashSet<User>();
 	private Department parent;

@@ -10,11 +10,10 @@
 		});
 		
 		// 在被嵌套时就刷新上级窗口
-		/**
-		
 		if(window.parent != window){
 			window.parent.location.reload(true);
-		}**/
+		}
+		
 	</script>
 </head>
 

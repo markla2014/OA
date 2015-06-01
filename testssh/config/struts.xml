@@ -12,7 +12,7 @@
     <constant name="struts.ui.theme" value="simple" />
 
 
-
+<!-- 可以配置命名空间 -->
     <package name="default" namespace="/" extends="struts-default">
 		<interceptors>
 		<!--定义一个拦截器对象 -->
@@ -25,6 +25,11 @@
 		</interceptors>
 		<!-- 设置固定的拦截器对象 
 		<default-interceptors-ref name="mystack"></default-interceptors-ref>-->
+		<!-- 配置全局的跳转页面 -->
+		<global-results>
+			<result name="noPrivilegeError">/noPrivilegeError.jsp</result>
+			<result name="loginUI">/WEB-INF/jsp/userAction/loginUI.jsp</result>
+		</global-results>
 		
 		<!-- 测试用的action，当与Spring整合后，class属性写的就是Spring中bean的名称 -->
 		<action name="test" class="testAction">
@@ -56,7 +61,7 @@
 			<result name="list">/WEB-INF/jsp/userAction/list.jsp</result>
 			<result name="saveUI">/WEB-INF/jsp/userAction/saveUI.jsp</result>
 			<result name="toList" type="redirectAction">userAction_list</result>
-			<result name="loginUI">/WEB-INF/jsp/userAction/loginUI.jsp</result>
+		
 			<result name="logout">/WEB-INF/jsp/userAction/logout.jsp</result>
 			<result name="toIndex" type="redirect">/index.jsp</result>
 		</action>

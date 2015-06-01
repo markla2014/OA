@@ -1,14 +1,24 @@
 package cn.itcast.oa.domain;
 
+import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
+import com.opensymphony.xwork2.ActionContext;
 
 /**
  * 用户
  * @author tyg
  * 
  */
-public class User {
+/**
+ * 转换序列化文件
+ * 让内存持续存储
+ * @author markla
+ *
+ */
+public class User implements Serializable {
 	private Long id;
 	private Department department;
 	private Set<Role> roles = new HashSet<Role>();
@@ -33,6 +43,13 @@ public class User {
     	 if(isMark()){
     		 return true;
     	 }
+    	 List<String> allPrivilegeUrls=(List<String>)ActionContext.getContext().getApplication().get("allPrivilegeUrls");
+    	 if(allPrivilegeUrls.contains(privilege)){
+    		 // 如果是有权限的才可以使用权限
+    		 return true;
+    	 }else{
+    		 
+    	 
     	 for(Role role:roles){
     		
     		 for(Privilege p:role.getPrivileges()){
@@ -41,8 +58,9 @@ public class User {
     				 return true;
     			 }
     		 }
+    		 
     	 }
-    	
+    	 }
     	 return false;
      }
      /*
