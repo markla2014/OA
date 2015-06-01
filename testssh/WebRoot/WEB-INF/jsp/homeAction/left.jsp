@@ -9,6 +9,7 @@
 		function menuClick( menuDiv ){
 			// $(".MenuLevel2").not( $(menuDiv).next() ).hide();
 			$(menuDiv).next().toggle(); // show(), hide(), toggle()
+			//显示隐藏
 		}
 	</script>
 	
@@ -26,20 +27,20 @@
 	            	${name}
 	            </div>
 	            <%-- 二级菜单 display: none; --%>
-	            <ul style="" class="MenuLevel2">
+	            <ul style="display: none;" class="MenuLevel2">
 	            	<s:iterator value="children">
-	            	<s:if test="#session.user.hasPrivilegeByName(name)">
+	            <s:if test="#session.user.hasPrivilegeByName(name)">
 		                <li class="level2">
 		                    <div class="level2Style">
 			                    <img src="style/images/MenuIcon/menu_arrow_single.gif" /> 
 			                    <a target="right" href="${pageContext.request.contextPath}/${url}.action"> ${name}</a>
 		                 	</div>
 		                </li>
-	                </s:if>
+	            </s:if>
 	            	</s:iterator>
 	            </ul>
 	        </li>
-        </s:if>
+      </s:if> 
 		</s:iterator>        
     </ul>
     

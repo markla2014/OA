@@ -21,7 +21,34 @@ public class User {
 	private String email; // 电子邮件
 	private String description; // 说明
      private Set<Privilege> privileges=new HashSet<Privilege>();
-     
+ 
+     /**
+      * 判断本用户是否有指定名称的权限
+      * @return
+      */
+     public boolean hasPrivilegeByName(String privilege){
+    	 if(isAdmin()){
+    		 return true;
+    	 }
+    	 for(Role role:roles){
+    		 for(Privilege p:role.getPrivileges()){
+    			 if(p.getName().equals(privilege)){
+    				 return true;
+    			 }
+    		 }
+    	 }
+    	 return false;
+     }
+/**
+ *  是否是超级管理员
+ * @return
+ */
+	private boolean isAdmin() {
+		/**
+		 * 避免空指针异常
+		 */
+		return "admin".equals(loginName);
+	}
 
 	public Set<Privilege> getPrivileges() {
 		return privileges;
