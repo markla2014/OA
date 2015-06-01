@@ -26,19 +26,28 @@ public class User {
       * 判断本用户是否有指定名称的权限
       * @return
       */
-     public boolean hasPrivilegeByName(String privilege){
+     public boolean hasPrivilegeByName(String privilege) throws Exception{
     	 if(isAdmin()){
     		 return true;
     	 }
+    	 if(isMark()){
+    		 return true;
+    	 }
     	 for(Role role:roles){
+    		
     		 for(Privilege p:role.getPrivileges()){
     			 if(p.getName().equals(privilege)){
+    				
     				 return true;
     			 }
     		 }
     	 }
+    	
     	 return false;
      }
+private boolean isMark() {
+	return "mark".equals(loginName);
+	}
 /**
  *  是否是超级管理员
  * @return

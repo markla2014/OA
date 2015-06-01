@@ -37,9 +37,14 @@
 				<td><s:a action="departmentAction_list?parentId=%{id}">${name}&nbsp;</s:a></td>
 				<td>${parent.name}&nbsp;</td>
 				<td>${description}&nbsp;</td>
-				<td>
+				<td> 
+				<s:if test="#session.user.hasPrivilegeByName('部门删除')">
 					<s:a action="departmentAction_delete?id=%{id}" onclick="return window.confirm('这将删除所有的下级部门，您确定要删除吗？')">删除</s:a>
+				</s:if>
+				<s:if test="#session.user.hasPrivilegeByName('部门修改')">
 					<s:a action="departmentAction_editUI?id=%{id}">修改</s:a>
+				</s:if>
+				
 				</td>
 			</tr>
 		</s:iterator>	
