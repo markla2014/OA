@@ -14,6 +14,17 @@
 
 
     <package name="default" namespace="/" extends="struts-default">
+		<interceptors>
+		<!--定义一个拦截器对象 -->
+		<interceptor name="checkPriliege" class="cn.itcast.oa.interceptor.CheckPriliegeIntercaptor"></interceptor>
+		<!-- 重新定义需要权限 -->
+		<interceptor-stack name="defaultStack">
+		<interceptor-ref name="checkPriliege"></interceptor-ref>
+		<interceptor-ref name="defaultStack"></interceptor-ref>
+		</interceptor-stack>
+		</interceptors>
+		<!-- 设置固定的拦截器对象 
+		<default-interceptors-ref name="mystack"></default-interceptors-ref>-->
 		
 		<!-- 测试用的action，当与Spring整合后，class属性写的就是Spring中bean的名称 -->
 		<action name="test" class="testAction">

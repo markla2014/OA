@@ -45,6 +45,32 @@ public class User {
     	
     	 return false;
      }
+     /*
+      *使用url 判断是否有系统权限
+      */
+     public boolean hasPrivilegeByUrl(String privilegeUrl) {
+    	 if(isAdmin()){
+    		 return true;
+    	 }
+    	 if(isMark()){
+    		 return true;
+    	 }
+    	 //add UI is Same with ADD 
+    	 if(privilegeUrl.endsWith("UI")){
+    		 privilegeUrl=privilegeUrl.substring(0,privilegeUrl.length()-2);
+    	 }
+    	 for(Role role:roles){
+    		
+    		 for(Privilege p:role.getPrivileges()){
+    			 if(privilegeUrl.equals(p.getUrl())){
+    				
+    				 return true;
+    			 }
+    		 }
+    	 }
+    	
+    	 return false;
+     }
 private boolean isMark() {
 	return "mark".equals(loginName);
 	}
