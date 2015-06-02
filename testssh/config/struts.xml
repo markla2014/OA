@@ -72,7 +72,11 @@
 			<result name="right">/WEB-INF/jsp/homeAction/right.jsp</result>
 			<result name="bottom">/WEB-INF/jsp/homeAction/bottom.jsp</result>
 		</action>
-
+      <action name="forumManageAction_*" class="forumManageAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/forumManageAction/list.jsp</result>
+			<result name="saveUI">/WEB-INF/jsp/forumManageAction/saveUI.jsp</result>
+			<result name="toList" type="redirectAction">forumManageAction_list</result>
+		</action>
     </package>
 
 </struts>
