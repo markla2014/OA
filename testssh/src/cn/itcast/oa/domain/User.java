@@ -22,7 +22,7 @@ public class User implements Serializable {
 	private Long id;
 	private Department department;
 	private Set<Role> roles = new HashSet<Role>();
-
+	private static final long serialVersionUID = -3286564461647015367L;
 	private String loginName; // 登录名
 	private String password; // 密码
 	private String name; // 真实姓名
@@ -43,12 +43,6 @@ public class User implements Serializable {
     	 if(isMark()){
     		 return true;
     	 }
-    	 List<String> allPrivilegeUrls=(List<String>)ActionContext.getContext().getApplication().get("allPrivilegeUrls");
-    	 if(allPrivilegeUrls.contains(privilege)){
-    		 // 如果是有权限的才可以使用权限
-    		 return true;
-    	 }else{
-    		 
     	 
     	 for(Role role:roles){
     		
@@ -60,7 +54,7 @@ public class User implements Serializable {
     		 }
     		 
     	 }
-    	 }
+    	 
     	 return false;
      }
      /*
@@ -77,6 +71,12 @@ public class User implements Serializable {
     	 if(privilegeUrl.endsWith("UI")){
     		 privilegeUrl=privilegeUrl.substring(0,privilegeUrl.length()-2);
     	 }
+    	 @SuppressWarnings("unchecked")
+		List<String> allPrivilegeUrls=(List<String>)ActionContext.getContext().getApplication().get("allPrivilegeUrls");
+    	 if(!allPrivilegeUrls.contains(privilegeUrl)){
+    		 // 如果是有权限的才可以使用权限
+    		 return true;
+    	 }else{
     	 for(Role role:roles){
     		
     		 for(Privilege p:role.getPrivileges()){
@@ -86,7 +86,7 @@ public class User implements Serializable {
     			 }
     		 }
     	 }
-    	
+    	 }
     	 return false;
      }
 private boolean isMark() {

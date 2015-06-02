@@ -45,7 +45,7 @@
                         <td><s:textfield name="name" cssClass="InputStyle required"/> *</td>
                     </tr>
                     <tr><td>职能说明</td>
-                        <td><s:textarea name="description" cssClass="TextareaStyle required"></s:textarea></td>
+                        <td><s:textarea name="description" cssClass="TextareaStyle"></s:textarea></td>
                     </tr>
                 </table>
             </div>
