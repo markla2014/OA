@@ -126,7 +126,7 @@ public class UserAction extends BaseAction<User> {
 		User user = userService.getById(model.getId());
 
 		// 2，设置要修改的属性（要使用MD5摘要）
-		String passwdMD5 = DigestUtils.md5Hex("1234");
+		String passwdMD5 = DigestUtils.md5Hex("1111");
 		user.setPassword(passwdMD5);
 
 		// 3，更新到数据库
@@ -145,7 +145,8 @@ public class UserAction extends BaseAction<User> {
 	}
   //登陆
 	public String login() throws Exception {
-        User user=userService.getByloginNameAndPassword(model.getLoginName(),model.getPassword());
+		String md5=DigestUtils.md5Hex(model.getPassword());
+        User user=userService.getByloginNameAndPassword(model.getLoginName(),md5);
        
 		if(user==null){
 			 //国际化，配置国际文件 addFieldError("login",getText"login.error");
