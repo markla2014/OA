@@ -13,7 +13,13 @@
 		<property name="description"/>
          <property name="position"/>
          
-		
+         <property name="topicCount"></property>
+         <property name="articleCount"></property>
+     <set name="topics">
+     <key column="forumId"></key>
+     <one-to-many class="Topic"></one-to-many>
+     </set>       
+	<many-to-one name="lastTopic" class="Topic" column="lastTopicId" unique="true"></many-to-one>
 	</class>
 	
 </hibernate-mapping>
