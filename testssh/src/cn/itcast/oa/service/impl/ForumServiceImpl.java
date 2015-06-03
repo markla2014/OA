@@ -25,15 +25,35 @@ public class ForumServiceImpl  extends BaseDaoImpl<Forum> implements ForumServic
 	public void moveUp(Long id) {
 		// TODO Auto-generated method stub
 		Forum forum=getById(id);
-		Forum other=null;
+		int oldPosition=forum.getPosition();
+		Forum other=(Forum)getSession().createQuery("from Forum f where f.position<? order by f.position ASC")
+				.setParameter(0, oldPosition)
+				.setFirstResult(0)
+				.setMaxResults(0)
+				.uniqueResult();
+		if(other ==null){
+			return;
+		}
 		forum.setPosition(other.getPosition());
-		other.setPosition(forum.getPosition());
+		other.setPosition(oldPosition);
 		
 	}
 
 	@Override
 	public void moveDown(Long id) {
 		// TODO Auto-generated method stub
+		Forum forum=getById(id);
+		int oldPosition=forum.getPosition();
+		Forum other=(Forum)getSession().createQuery("from Forum f where f.position<? order by f.position ASC")
+				.setParameter(0, oldPosition)
+				.setFirstResult(0)
+				.setMaxResults(0)
+				.uniqueResult();
+		if(other ==null){
+			return;
+		}
+		forum.setPosition(other.getPosition());
+		other.setPosition(oldPosition);
 		
 	}
 
