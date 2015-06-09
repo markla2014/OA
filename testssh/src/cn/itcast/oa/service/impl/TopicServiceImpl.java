@@ -11,9 +11,10 @@ import cn.itcast.oa.service.TopicService;
 @Service
 public class TopicServiceImpl extends BaseDaoImpl<Topic> implements TopicService {
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Topic> findByForum(Forum forum) {
-	 return getSession().createQuery("Form topic t here t.forum=? order by t.type desc,t.lastUpdateTime desc ")
+	 return getSession().createQuery("From Topic t where t.forum=? order by t.type desc,t.lastUpdateTime desc ")
 			 .setParameter(0,forum) .list();
 	}
 

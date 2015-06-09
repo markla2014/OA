@@ -52,9 +52,9 @@ xmlns:context="http://www.springframework.org/schema/context"
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="configLocation" value="classpath:hibernate.cfg.xml"></property>
 	</bean>
+<!-- 配置声明式的事务管理（采用基于注解的方式） -->
 
-
-	<!-- 配置声明式的事务管理（采用基于注解的方式） -->
+	
 	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
@@ -74,9 +74,10 @@ xmlns:context="http://www.springframework.org/schema/context"
 	</tx:advice>
 	
 <aop:config>    
-  <!--切入点-->    
+  
   <aop:pointcut id="txPointCut" expression="execution(* cn.itcast.oa.service.impl.*.*(..))"/>    
-  <!--通知器-->    
+    
   <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointCut"/>    
 </aop:config>    
+
 </beans>

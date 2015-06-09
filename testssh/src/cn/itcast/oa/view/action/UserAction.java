@@ -145,6 +145,7 @@ public class UserAction extends BaseAction<User> {
 	}
   //登陆
 	public String login() throws Exception {
+		if("".compareTo(model.getPassword())!=0){
 		String md5=DigestUtils.md5Hex(model.getPassword());
         User user=userService.getByloginNameAndPassword(model.getLoginName(),md5);
        
@@ -154,6 +155,9 @@ public class UserAction extends BaseAction<User> {
 			return "loginUI";
 		}else{
 			ActionContext.getContext().getSession().put("user",user);
+			return "toIndex";
+		}
+		}else{
 			return "toIndex";
 		}
 		}

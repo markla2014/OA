@@ -16,11 +16,12 @@ public class UserServiceImpl extends BaseDaoImpl<User> implements UserService {
 		 * "from User a where a.loginName= " + loginName + " and a.password= " +
 		 * password).list().get(0);
 		 **/
-		return (User) getSession()
+		User test=(User) getSession()
 				.createQuery(
 						"from User a where a.loginName= ? and a.password= ?")
 				.setParameter(0, loginName).setParameter(1, password)
 				.uniqueResult();
+		return test;
 
 	}
 
