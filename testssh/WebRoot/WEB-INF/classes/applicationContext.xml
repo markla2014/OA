@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+<beans xmlns="http://www.springframework.org/schema/beans" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:tx="http://www.springframework.org/schema/tx"
+	  xmlns:aop="http://www.springframework.org/schema/aop" 
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
 	http://www.springframework.org/schema/context 
 	http://www.springframework.org/schema/context/spring-context-2.5.xsd
 	http://www.springframework.org/schema/tx 
-	http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+	http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
 
 
 	<!-- 自动扫描与装配bean -->
@@ -54,5 +59,24 @@
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 	<tx:annotation-driven transaction-manager="transactionManager"/>
-
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+	<tx:attributes>
+	 <tx:method name="get*" propagation="REQUIRED" read-only="false"/>
+	 <tx:method name="list" propagation="REQUIRED" read-only="false"/>
+	 <tx:method name="add*" propagation="REQUIRED" read-only="false"/>
+	 <tx:method name="edit*" propagation="REQUIRED" read-only="false"/>
+	 <tx:method name="show" propagation="REQUIRED" read-only="false"/>
+	 <tx:method name="save" propagation="REQUIRED" read-only="false"/>
+	 <tx:method name="find*" propagation="REQUIRED" read-only="false"/>
+	 <tx:method name="update" propagation="REQUIRED" read-only="false"/>
+	 <tx:method name="delete" propagation="REQUIRED" read-only="false"/>
+	</tx:attributes>
+	</tx:advice>
+	
+<aop:config>    
+  <!--切入点-->    
+  <aop:pointcut id="txPointCut" expression="execution(* cn.itcast.oa.service.impl.*.*(..))"/>    
+  <!--通知器-->    
+  <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointCut"/>    
+</aop:config>    
 </beans>

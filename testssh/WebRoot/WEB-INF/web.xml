@@ -15,6 +15,7 @@
 <listener>
   <listener-class>cn.itcast.oa.listener.InitServletContextListener</listener-class>
 </listener>
+<!--  懒加载过滤 hibernate 3 方法 -->
 <filter> 
 <filter-name>OpenSessionInViewFilter</filter-name> 
 <filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class> 
