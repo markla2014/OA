@@ -17,5 +17,19 @@ public class TopicServiceImpl extends BaseDaoImpl<Topic> implements TopicService
 	 return getSession().createQuery("From Topic t where t.forum=? order by t.type desc,t.lastUpdateTime desc ")
 			 .setParameter(0,forum) .list();
 	}
-
+	@Override
+	public void save(Topic topic){
+		//设置属性
+//		 model.setLastReply(lastReply);
+//		 
+//		 model.setReplyCount(replyCount);
+//		 model.setType(type);
+		topic.setLastUpdateTime(topic.getPostTime());
+		Forum forum=topic.getForum();
+		forum.setTopicCount(forum.getTopicCount()+1);
+		forum.setArticleCount(forum.getArticleCount()+1);
+		forum.setLastTopic(topic);
+		getSession().update(forum);
+	}
+  
 }
