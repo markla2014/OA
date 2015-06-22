@@ -14,7 +14,7 @@ public class TopicServiceImpl extends BaseDaoImpl<Topic> implements TopicService
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Topic> findByForum(Forum forum) {
-	 return getSession().createQuery("From Topic t where t.forum=? order by t.type desc,t.lastUpdateTime desc ")
+	 return getSession().createQuery("From Topic t where t.forum=? order by (CASE t.type WHEN 2 THEN 2 ELSE 0 END) desc,t.lastUpdateTime desc ")
 			 .setParameter(0,forum) .list();
 	}
 	@Override

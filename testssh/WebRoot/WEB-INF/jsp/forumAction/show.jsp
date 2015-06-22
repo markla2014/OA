@@ -72,6 +72,7 @@
 				<s:iterator value="#topicList">
 					<tr height="35" id="d0" class="template">
 						<td></td>
+						<!-- 根据标题的类型进行展示图片 -->
 						<td class="ForumTopicPageDataLine" align="center"><img src="${pageContext.request.contextPath}/style/images/topicType_${type}.gif" /></td>
 						<td class="Topic">
 							<s:a cssClass="Default" action="topicAction_show?id=%{id}">${title}</s:a>

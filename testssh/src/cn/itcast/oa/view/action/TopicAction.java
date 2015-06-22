@@ -1,6 +1,7 @@
 package cn.itcast.oa.view.action;
 
 import java.util.Date;
+import java.util.List;
 
 import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 
 import cn.itcast.oa.base.BaseAction;
 import cn.itcast.oa.domain.Forum;
+import cn.itcast.oa.domain.Reply;
 import cn.itcast.oa.domain.Topic;
 import cn.itcast.oa.domain.User;
 
@@ -18,6 +20,10 @@ public class TopicAction extends BaseAction<Topic> {
 private Long forumId;
 
 	 public String show() throws Exception{
+		 Topic topic=topicService.getById(model.getId());
+		 ActionContext.getContext().put("topic",topic);
+		 List<Reply> replyList=replyServce.findByTopic(topic);
+		 ActionContext.getContext().put("replyList",replyList);
 		return "show";
 		 
 	 }

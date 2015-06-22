@@ -26,7 +26,7 @@
 		<many-to-one name="forum" class="Forum" column="forumId"></many-to-one>
 		
 		<!-- replies属性，本类与Reply的一对多 -->
-		<set name="replies" lazy="false">
+		<set name="replies" lazy="false" cascade="save-update,persist">
 			<key column="topicId"></key>
 			<one-to-many class="Reply"/>
 		</set>
