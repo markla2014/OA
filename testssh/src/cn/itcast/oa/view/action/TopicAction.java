@@ -1,6 +1,7 @@
 package cn.itcast.oa.view.action;
 
 import java.util.Date;
+import cn.itcast.oa.util.*;
 import java.util.List;
 
 import org.apache.struts2.ServletActionContext;
@@ -39,7 +40,7 @@ private Long forumId;
         
          
 		 //>>
-		 model.setAuthor(getCurrentUser());//当前登录的用户
+		 model.setAuthor(new CommonUtil().getCurrentUser());//当前登录的用户
 		 model.setIpAddr(ServletActionContext.getRequest().getRemoteAddr());//
 		 model.setPostTime(new Date());
 		 //>>可以放到业务方法中的配置
@@ -48,9 +49,7 @@ private Long forumId;
 		//  topicService.save(model);
 		 return "toTopicShow";
 	 }
-	 protected User getCurrentUser(){
-		 return (User)ActionContext.getContext().getSession().get("user");
-	 }
+
 	public Long getForumId() {
 		return forumId;
 	}
