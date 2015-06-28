@@ -1,23 +1,34 @@
 package cn.itcast.oa.view.action;
 
+import java.util.HashSet;
 import java.util.List;
-
-import javax.annotation.Resource;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import cn.itcast.oa.base.BaseAction;
+import cn.itcast.oa.domain.Privilege;
 import cn.itcast.oa.domain.Role;
-import cn.itcast.oa.service.RoleService;
 
 import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.ModelDriven;
 
 @Controller
 @Scope("prototype")
 public class RoleAction extends BaseAction<Role> {
+	private Long[] privilegeIds;
+
+	/**
+	 * privilegeIds get set
+	 * 
+	 * @return
+	 */
+	public Long[] getPrivilegeIds() {
+		return privilegeIds;
+	}
+
+	public void setPrivilegeIds(Long[] privilegeIds) {
+		this.privilegeIds = privilegeIds;
+	}
 
 	/** 列表 */
 	public String list() throws Exception {
@@ -77,5 +88,34 @@ public class RoleAction extends BaseAction<Role> {
 	}
 
 	// -----------------
+	/** 设置权限和页面 */
+	public String editPrivilegeUI() throws Exception {
+		Role role = roleService.getById(model.getId());
+		ActionContext.getContext().put("role", role);
+		List<Privilege> privilegeList = privilegeService.findTopList();
+		ActionContext.getContext().put("privilegeList", privilegeList);
+		Long[] PrivilegeTemp = new Long[role.getPrivileges().size()];
+		int i = 0;
+		for (Privilege privilege : role.getPrivileges()) {
+			PrivilegeTemp[i++] = privilege.getId();
+		}
+		setPrivilegeIds(PrivilegeTemp);
+		// ActionContext.getContext().getValueStack().push(role); // 放到栈顶
+		return "setPrivilegeUI";
+	}
 
+	/** 修改 */
+	public String setPrivilege() throws Exception {
+		// 准备会显的数据
+		Role role = roleService.getById(model.getId());
+		List<Privilege> privilegesList = privilegeService
+				.getByIds(getPrivilegeIds());
+		// 设置权限
+		role.setPrivileges(new HashSet<Privilege>(privilegesList));
+
+		// 更新到数据库中
+		roleService.update(role);
+
+		return "toList";
+	}
 }

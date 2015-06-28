@@ -11,8 +11,24 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:applicationContext.xml</param-value>
 	</context-param>
-
-
+	<!--用于初始化数据的监听器 -->
+<listener>
+  <listener-class>cn.itcast.oa.listener.InitServletContextListener</listener-class>
+</listener>
+<!--  懒加载过滤 hibernate 3 方法 -->
+<filter> 
+<filter-name>OpenSessionInViewFilter</filter-name> 
+<filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class> 
+<init-param>  
+<param-name>sessionFactoryBeanName</param-name>  
+<param-value>sessionFactory</param-value>  
+</init-param>  
+</filter> 
+  
+<filter-mapping>
+ <filter-name>OpenSessionInViewFilter</filter-name> 
+ <url-pattern>*.action</url-pattern> 
+ </filter-mapping>
 	<!-- 配置Struts2的主过滤器 -->
 	<filter>
 		<filter-name>struts2</filter-name>

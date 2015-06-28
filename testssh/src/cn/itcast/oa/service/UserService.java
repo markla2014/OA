@@ -5,4 +5,6 @@ import cn.itcast.oa.domain.User;
 
 public interface UserService extends BaseDao<User> {
 
+	User getByloginNameAndPassword(String loginName, String password);
+
 }

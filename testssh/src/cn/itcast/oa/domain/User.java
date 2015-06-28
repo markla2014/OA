@@ -1,18 +1,28 @@
 package cn.itcast.oa.domain;
 
+import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
+import com.opensymphony.xwork2.ActionContext;
 
 /**
  * 用户
  * @author tyg
  * 
  */
-public class User {
+/**
+ * 转换序列化文件
+ * 让内存持续存储
+ * @author markla
+ *
+ */
+public class User implements Serializable {
 	private Long id;
 	private Department department;
 	private Set<Role> roles = new HashSet<Role>();
-
+	private static final long serialVersionUID = -3286564461647015367L;
 	private String loginName; // 登录名
 	private String password; // 密码
 	private String name; // 真实姓名
@@ -20,6 +30,86 @@ public class User {
 	private String phoneNumber; // 电话号码
 	private String email; // 电子邮件
 	private String description; // 说明
+     private Set<Privilege> privileges=new HashSet<Privilege>();
+ 
+     /**
+      * 判断本用户是否有指定名称的权限
+      * @return
+      */
+     public boolean hasPrivilegeByName(String privilege) throws Exception{
+    	 if(isAdmin()){
+    		 return true;
+    	 }
+    	 if(isMark()){
+    		 return true;
+    	 }
+    	 
+    	 for(Role role:roles){
+    		
+    		 for(Privilege p:role.getPrivileges()){
+    			 if(p.getName().equals(privilege)){
+    				
+    				 return true;
+    			 }
+    		 }
+    		 
+    	 }
+    	 
+    	 return false;
+     }
+     /*
+      *使用url 判断是否有系统权限
+      */
+     public boolean hasPrivilegeByUrl(String privilegeUrl) {
+    	 if(isAdmin()){
+    		 return true;
+    	 }
+    	 if(isMark()){
+    		 return true;
+    	 }
+    	 //add UI is Same with ADD 
+    	 if(privilegeUrl.endsWith("UI")){
+    		 privilegeUrl=privilegeUrl.substring(0,privilegeUrl.length()-2);
+    	 }
+    	 @SuppressWarnings("unchecked")
+		List<String> allPrivilegeUrls=(List<String>)ActionContext.getContext().getApplication().get("allPrivilegeUrls");
+    	 if(!allPrivilegeUrls.contains(privilegeUrl)){
+    		 // 如果是有权限的才可以使用权限
+    		 return true;
+    	 }else{
+    	 for(Role role:roles){
+    		
+    		 for(Privilege p:role.getPrivileges()){
+    			 if(privilegeUrl.equals(p.getUrl())){
+    				
+    				 return true;
+    			 }
+    		 }
+    	 }
+    	 }
+    	 return false;
+     }
+private boolean isMark() {
+	return "mark".equals(loginName);
+	}
+/**
+ *  是否是超级管理员
+ * @return
+ */
+	private boolean isAdmin() {
+		/**
+		 * 避免空指针异常
+		 */
+		return "admin".equals(loginName);
+	}
+
+	public Set<Privilege> getPrivileges() {
+		return privileges;
+	}
+
+	public void setPrivileges(Set<Privilege> privileges) {
+		this.privileges = privileges;
+	}
 
 	public Long getId() {
 		return id;

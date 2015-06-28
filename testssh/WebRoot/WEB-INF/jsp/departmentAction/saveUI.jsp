@@ -37,12 +37,12 @@
                     <tr><td width="100">上级部门</td>
                         <td><s:select name="parentId" cssClass="SelectStyle"
                         list="#departmentList" listKey="id" listValue="name"
-                        headerKey="" headValue="请选择部门" />
+                        headerKey="" headValue="请选择部门"  emptyOption="true"/>
                           
                         </td>
                     </tr>
                     <tr><td>部门名称</td>
-                        <td><s:textfield name="name" cssClass="InputStyle"/> *</td>
+                        <td><s:textfield name="name" cssClass="InputStyle required"/> *</td>
                     </tr>
                     <tr><td>职能说明</td>
                         <td><s:textarea name="description" cssClass="TextareaStyle"></s:textarea></td>
