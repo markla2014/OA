@@ -10,8 +10,6 @@
 	<constant name="struts.action.extension" value="action" />
 	<!-- 配置主题 -->
 	<constant name="struts.ui.theme" value="simple" />
-
-
 	<!-- 可以配置命名空间 -->
 	<package name="default" namespace="/" extends="struts-default">
 		<interceptors>
@@ -96,7 +94,7 @@
 				<result name="addUI">/WEB-INF/jsp/replyAction/addUI.jsp</result>
 		<result name="toTopicShow" type="redirectAction">topicAction_show?id=${topicId}</result>
 		</action>
-	</package>
-
+ 
+</package>
 </struts>
 
