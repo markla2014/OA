@@ -26,13 +26,13 @@
 		<many-to-one name="forum" class="Forum" column="forumId"></many-to-one>
 		
 		<!-- replies属性，本类与Reply的一对多 -->
-		<set name="replies" lazy="false" cascade="save-update,persist">
+		<set name="replies" cascade="save-update,persist">
 			<key column="topicId"></key>
 			<one-to-many class="Reply"/>
 		</set>
 		
 		<!-- lastReply属性，本类与Reply的一对一 -->
-		<many-to-one name="lastReply" class="Reply" column="lastReplyId" unique="true" lazy="false"></many-to-one>	
+		<many-to-one name="lastReply" class="Reply" column="lastReplyId" unique="true"></many-to-one>	
 		
 	</class>
 	

@@ -5,7 +5,7 @@
 
 <hibernate-mapping package="cn.itcast.oa.domain">
 
-	<class name="Forum" table="itcast_forum" lazy="false">
+	<class name="Forum" table="itcast_forum">
 		<id name="id">
             <generator class="native"/>
 		</id>
@@ -15,11 +15,11 @@
          
          <property name="topicCount"></property>
          <property name="articleCount"></property>
-     <set name="topics" lazy="false">
+     <set name="topics" >
      <key column="forumId"></key>
      <one-to-many class="Topic"></one-to-many>
      </set>       
-	<many-to-one name="lastTopic" class="Topic" column="lastTopicId" unique="true" lazy="false" cascade="save-update,persist"></many-to-one>
+	<many-to-one name="lastTopic" class="Topic" column="lastTopicId" unique="true" cascade="save-update,persist"></many-to-one>
 	</class>
 	
 </hibernate-mapping>
