@@ -10,27 +10,27 @@
     <div id="Title_bar_Head">
         <div id="Title_Head"></div>
         <div id="Title"><!--页面标题-->
-            <img border="0" width="13" height="13" src="${pageContext.request.contextPath}/style/images/title_arrow.gif"/> 部门管理
+            <img style="border:0" width="13" height="13" src="${pageContext.request.contextPath}/style/images/title_arrow.gif"/> 部门管理
         </div>
         <div id="Title_End"></div>
     </div>
 </div>
 
 <div id="MainArea">
-    <table cellspacing="0" cellpadding="0" class="TableStyle">
+    <table class="TableStyle">
        
         <!-- 表头-->
         <thead>
-            <tr align=center valign=middle id=TableTitle>
-            	<td width="150px">部门名称</td>
-				<td width="150px">上级部门名称</td>
-				<td width="200px">职能说明</td>
+            <tr style="text-align:center;text-align:middle" id=TableTitle>
+            	<td style="width:150px">部门名称</td>
+				<td style="width:150px">上级部门名称</td>
+				<td style="width:200px">职能说明</td>
 				<td>相关操作</td>
             </tr>
         </thead>
 
 		<!--显示数据列表-->
-        <tbody id="TableData" class="dataContainer" datakey="departmentList">
+        <tbody id="TableData" class="dataContainer">
         
         <s:iterator value="#departmentList">
 			<tr class="TableDetail1 template">
