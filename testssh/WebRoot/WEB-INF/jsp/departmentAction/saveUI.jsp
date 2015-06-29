@@ -13,7 +13,7 @@
     <div id="Title_bar_Head">
         <div id="Title_Head"></div>
         <div id="Title"><!--页面标题-->
-            <img border="0" width="13" height="13" src="${pageContext.request.contextPath}/style/images/title_arrow.gif"/> 部门信息
+            <img style="border:0" width="13" height="13" src="${pageContext.request.contextPath}/style/images/title_arrow.gif"/> 部门信息
         </div>
         <div id="Title_End"></div>
     </div>
@@ -33,8 +33,8 @@
         <!-- 表单内容显示 -->
         <div class="ItemBlockBorder">
             <div class="ItemBlock">
-                <table cellpadding="0" cellspacing="0" class="mainForm">
-                    <tr><td width="100">上级部门</td>
+                <table class="mainForm">
+                    <tr><td style="width:100">上级部门</td>
                         <td><s:select name="parentId" cssClass="SelectStyle"
                         list="#departmentList" listKey="id" listValue="name"
                         headerKey="" headValue="请选择部门"  emptyOption="true"/>

@@ -71,7 +71,7 @@
 							<table cellpadding="0" border="0" cellspacing="0">
 								<tr>
 								<s:iterator begin="1" end="14" var="num">
-									<td width="50" style="border-bottom:0 solid #ffffff">
+									<td style="border-bottom:0 solid #ffffff;width=50">
 										<input type="radio" name="faceIcon" value="${num}" id="r_${num}"/>
 										<label for="r_${num}"><img width="19" height="19" src="${pageContext.request.contextPath}/style/images/face/${num}.gif" disabled="true" align="absmiddle"/></label>
 									</td>
