@@ -5,18 +5,22 @@
     <%@ include file="/WEB-INF/jsp/public/common.jspf" %>
 	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style/blue/forum.css" />
 	
-	<script type="text/javascript" src="${pageContext.request.contextPath}/fckeditor/fckeditor.js"></script>
-	<script type="text/javascript"> 
-		$(function(){
-			var oFCKeditor = new FCKeditor( 'content' ) ; // 提交表单时本字段使用的参数名
-			oFCKeditor.BasePath	= "${pageContext.request.contextPath}/fckeditor/" ; // 必须要有，这是指定editor文件夹所在的路径，一定要以'/'结尾
-			oFCKeditor.Height	= "95%" ;
-			oFCKeditor.Width	= "95%" ;
-			oFCKeditor.ToolbarSet = "bbs" ;
-			oFCKeditor.ReplaceTextarea(); // 替换id或name为指定值的textarea
-		});
-	</script>
-	
+	<script type="text/javascript" src="${pageContext.request.contextPath}/script/ckeditor/ckeditor.js"></script>
+<script type="text/javascript">
+$(function(){
+	if (typeof CKEDITOR == 'undefined') {
+		document.write('加载CKEditor失败');
+	} else {
+		var editor = CKEDITOR.replace('content', {
+			toolbar : 'bbs',
+			basePath : '${pageContext.request.contextPath}/ckeditor/',
+			width : '95%',
+			height : '95%',
+			skin : 'kama',
+			customConfig : 'myconfig.js'
+		});}});
+</script>
+
 </head>
 <body>
 
@@ -84,7 +88,7 @@
 						<td class="InputAreaBg"><div class="InputTitle">内容</div></td>
 						<td class="InputAreaBg">
 							<div class="InputContent">
-								<s:textarea name="content" cssStyle="width:650px;height:200px;"></s:textarea>
+								<s:textarea id="content" name="content" cssStyle="width:650px;height:200px;"></s:textarea>
 							</div>
 						</td>
 					</tr>
