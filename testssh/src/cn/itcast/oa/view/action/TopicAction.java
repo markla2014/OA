@@ -19,12 +19,21 @@ import com.opensymphony.xwork2.ActionContext;
 @Scope("prototype")
 public class TopicAction extends BaseAction<Topic> {
 private Long forumId;
-
-	 public String show() throws Exception{
+private int pageNum=1;
+	 public int getPageNum() {
+	return pageNum;
+}
+public void setPageNum(int pageNum) {
+	this.pageNum = pageNum;
+}
+	public String show() throws Exception{
 		 Topic topic=topicService.getById(model.getId());
 		 ActionContext.getContext().put("topic",topic);
-		 List<Reply> replyList=replyServce.findByTopic(topic);
-		 ActionContext.getContext().put("replyList",replyList);
+		/* List<Reply> replyList=replyServce.findByTopic(topic);
+		 ActionContext.getContext().put("replyList",replyList);*/
+
+		 PageBean pageBean=replyServce.getPageBean(pageNum,topic);
+		 ActionContext.getContext().getValueStack().push(pageBean);
 		return "show";
 		 
 	 }

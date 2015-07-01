@@ -112,7 +112,7 @@
 
 
 			<!-- ~~~~~~~~~~~~~~~ 显示回复列表 ~~~~~~~~~~~~~~~ -->
-			<s:iterator value="#replyList" status="status"> 
+			<s:iterator value="recordList" status="status"> 
 			<div class="ListArea template">
 				<table border="0" cellpadding="0" cellspacing="1" width="100%">
 					<tr>
@@ -168,9 +168,9 @@
 		<!--分页信息-->
 		<div id=PageSelectorBar>
 			<div id=PageSelectorMemo>
-				页次：7/13页 &nbsp;
-				每页显示：30条 &nbsp;
-				总记录数：385条
+				页次：${currentPage}/${pageCount}页 &nbsp;
+				每页显示: ${pageSize}条 &nbsp;
+				总记录数:${recordCount}条
 			</div>
 			<div id=PageSelectorSelectorArea>
 			
@@ -194,8 +194,13 @@
 				</a>
 				
 				转到：
-				<input onFocus="this.select();" maxlength="3" class="inputStyle" type="text" value="1" id="pn"/>
-				<input type="submit" value="Go" class="MiddleButtonStyle" />
+				
+				<select onchange="gotoPage(this.value})">
+				<s:iterator begin="1" end="%{pageCount}" var="num">
+				 <option value="${num}">${num}</option>
+				</s:iterator>
+				
+				</select>
 			</div>
 		</div>
 
