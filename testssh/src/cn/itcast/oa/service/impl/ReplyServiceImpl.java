@@ -44,11 +44,12 @@ public class ReplyServiceImpl extends BaseDaoImpl<Reply> implements
 	@Override
 	public PageBean getPageBean(int pageNum, Topic topic) {
 		int pageSize = Configuration.getPageSize();
+		@SuppressWarnings("rawtypes")
 		List list = getSession()
 				.createQuery(
 						"from Reply r where r.topic=? order by r.postTime Asc")
-				.setParameter(0, topic).setMaxResults(pageNum)
-				.setFirstResult((pageSize-1)*pageSize).list();
+				.setParameter(0, topic).setMaxResults(pageSize)
+				.setFirstResult((pageNum-1)*pageSize).list();
 
 		long count = (long) getSession()
 				.createQuery("select count(*) from Reply r where r.topic=?")

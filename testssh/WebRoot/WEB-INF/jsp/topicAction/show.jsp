@@ -4,6 +4,21 @@
 	<title>查看主题：${topic.title}</title>
     <%@ include file="/WEB-INF/jsp/public/common.jspf" %>
 	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style/blue/forum.css" />
+<script type="text/javascript" src="${pageContext.request.contextPath}/script/ckeditor/ckeditor.js"></script>
+<script type="text/javascript">
+$(function(){
+	if (typeof CKEDITOR == 'undefined') {
+		document.write('加载CKEditor失败');
+	} else {
+		var editor = CKEDITOR.replace('content', {
+			toolbar : 'bbs',
+			basePath : '${pageContext.request.contextPath}/ckeditor/',
+			width : '95%',
+			height : '95%',
+			skin : 'kama',
+			customConfig : 'myconfig.js'
+		});}});
+</script>
 </head>
 <body>
 
@@ -177,25 +192,23 @@
 				<a href="javascript:void(0)" title="首页" style="cursor: hand;">
 					<img src="${pageContext.request.contextPath}/style/blue/images/pageSelector/firstPage.png"/>
 				</a>
-				
-				<span class="PageSelectorNum" style="cursor: hand;" onClick="gotoPage(2);">3</span>
-				<span class="PageSelectorNum" style="cursor: hand;" onClick="gotoPage(2);">4</span>
-				<span class="PageSelectorNum" style="cursor: hand;" onClick="gotoPage(2);">5</span>
-				<span class="PageSelectorNum" style="cursor: hand;" onClick="gotoPage(2);">6</span>
-				<span class="PageSelectorNum PageSelectorSelected">7</span>
-				<span class="PageSelectorNum" style="cursor: hand;" onClick="gotoPage(2);">8</span>
-				<span class="PageSelectorNum" style="cursor: hand;" onClick="gotoPage(2);">9</span>
-				<span class="PageSelectorNum" style="cursor: hand;" onClick="gotoPage(2);">10</span>
-				<span class="PageSelectorNum" style="cursor: hand;" onClick="gotoPage(2);">11</span>
-				<span class="PageSelectorNum" style="cursor: hand;" onClick="gotoPage(2);">12</span>
-				
+				<!-- 选择项目 -->
+				<s:iterator begin="%{beginPageIndex}" end="endPageIndex" var="num">
+				<s:if test="currentPage==#num">
+				<span class="PageSelectorNum PageSelectorSelected">${num}</span>
+				</s:if>
+				<s:else>
+				<span class="PageSelectorNum" style="cursor:pointer;" onClick="gotoPage(${num});">${num}</span>
+				</s:else>
+				</s:iterator>
+			
 				<a href="#" title="尾页" style="cursor: hand;">
 					<img src="${pageContext.request.contextPath}/style/blue/images/pageSelector/lastPage.png"/>
 				</a>
 				
 				转到：
 				
-				<select onchange="gotoPage(this.value})">
+				<select onchange="gotoPage(this.value)">
 				<s:iterator begin="1" end="%{pageCount}" var="num">
 				 <option value="${num}">${num}</option>
 				</s:iterator>
@@ -203,7 +216,14 @@
 				</select>
 			</div>
 		</div>
-
+      <script type="text/javascript">
+        function gotoPage(num){
+       var test="topicAction_show.action?id=${id}&pageNum="+num;
+       //alert(test);
+       window.location=test;
+        }
+      
+      </script>
 		<div class="ForumPageTableBorder" style="margin-top: 25px;">
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
 				<tr valign="bottom">
