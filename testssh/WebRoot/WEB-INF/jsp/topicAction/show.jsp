@@ -74,6 +74,7 @@ $(function(){
 			</table>
 
 			<!-- ~~~~~~~~~~~~~~~ 显示主帖（主帖只在第1页显示） ~~~~~~~~~~~~~~~ -->
+			<s:if test="currentPage==1">
 			<div class="ListArea">
 				<table border="0" cellpadding="0" cellspacing="1" width="100%">
 					<tr>
@@ -123,6 +124,7 @@ $(function(){
 					</tr>
 				</table>
 			</div>
+			</s:if>
 			<!-- ~~~~~~~~~~~~~~~ 显示主帖结束 ~~~~~~~~~~~~~~~ -->
 
 
@@ -165,7 +167,7 @@ $(function(){
 					<tr><!--显示楼层等信息-->
 						<td class="Footer" height="28" align="center" valign="bottom">
 							<ul style="margin: 0px; width: 98%;">
-								<li style="float: left; line-height:18px;"><font color=#C30000>[${status.count}楼]</font>
+								<li style="float: left; line-height:18px;"><font color=#C30000>[${(currentPage-1)*pageSize+status.count}楼]</font>
 									<s:date name="%{postTime}" format="yyyy-MM-dd HH:mm:ss"/>
 								</li>
 								<li style="float: right;"><a href="javascript:scroll(0,0)">
@@ -208,12 +210,14 @@ $(function(){
 				
 				转到：
 				
-				<select onchange="gotoPage(this.value)">
+				<select id="pn" onchange="gotoPage(this.value)">
 				<s:iterator begin="1" end="%{pageCount}" var="num">
 				 <option value="${num}">${num}</option>
-				</s:iterator>
-				
+				</s:iterator>		
 				</select>
+				  <script type="text/javascript">
+          $("#pn").val(${currentPage});
+      </script>
 			</div>
 		</div>
       <script type="text/javascript">
@@ -221,6 +225,7 @@ $(function(){
        var test="topicAction_show.action?id=${id}&pageNum="+num;
        //alert(test);
        window.location=test;
+       
         }
       
       </script>
