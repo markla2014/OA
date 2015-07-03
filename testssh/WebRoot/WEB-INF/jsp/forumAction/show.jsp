@@ -48,7 +48,7 @@
 		</div>
 		
 		<div class="ForumPageTableBorder">
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<table style=" width:100%; border:0; border-collapse: collapse;">
 				<!--表头-->
 				<tr align="center" valign="middle">
 					<td width="3" class="ForumPageTableTitleLeft">
@@ -69,7 +69,7 @@
 				<!--主题列表-->
 				<tbody class="dataContainer" datakey="topicList">
 				
-				<s:iterator value="#topicList">
+				<s:iterator value="recordList">
 					<tr height="35" id="d0" class="template">
 						<td></td>
 						<!-- 根据标题的类型进行展示图片 -->
@@ -83,7 +83,7 @@
 								<li class="CreateTime"><s:date name="postTime" format="yyyy-MM-dd HH:mm:ss"/> </li>
 							</ul>
 						</td>
-						<td class="ForumTopicPageDataLine Reply" align="center"><b>${replyCount}</b></td>
+						<td class="ForumTopicPageDataLine" align="center"><b>${replyCount}</b></td>
 						<td class="ForumTopicPageDataLine">
 							<ul class="ForumPageTopicUl">
 								<li class="Author">${lastReply.author.name}</li>
@@ -133,42 +133,16 @@
 </div>
 
 <!--分页信息-->
-<div id=PageSelectorBar>
-	<div id=PageSelectorMemo>
-		页次：7/13页 &nbsp;
-		每页显示：30条 &nbsp;
-		总记录数：385条
-	</div>
-	<div id=PageSelectorSelectorArea>
-		<!--
-		<IMG SRC="${pageContext.request.contextPath}/style/blue/images/pageSelector/firstPage2.png"/>
-		-->
-		<a href="javascript:void(0)" title="首页" style="cursor: hand;">
-			<img src="${pageContext.request.contextPath}/style/blue/images/pageSelector/firstPage.png"/></a>
-		
-		<span class="PageSelectorNum" style="cursor: hand;" onClick="gotoPage(2);">3</span>
-		<span class="PageSelectorNum" style="cursor: hand;" onClick="gotoPage(2);">4</span>
-		<span class="PageSelectorNum" style="cursor: hand;" onClick="gotoPage(2);">5</span>
-		<span class="PageSelectorNum" style="cursor: hand;" onClick="gotoPage(2);">6</span>
-		<span class="PageSelectorNum PageSelectorSelected">7</span>
-		<span class="PageSelectorNum" style="cursor: hand;" onClick="gotoPage(2);">8</span>
-		<span class="PageSelectorNum" style="cursor: hand;" onClick="gotoPage(2);">9</span>
-		<span class="PageSelectorNum" style="cursor: hand;" onClick="gotoPage(2);">10</span>
-		<span class="PageSelectorNum" style="cursor: hand;" onClick="gotoPage(2);">11</span>
-		<span class="PageSelectorNum" style="cursor: hand;" onClick="gotoPage(2);">12</span>
-		
-		<!--
-		<IMG SRC="${pageContext.request.contextPath}/style/blue/images/pageSelector/lastPage2.png"/>
-		-->
-		<a href="#" title="尾页" style="cursor: hand;">
-			<img src="${pageContext.request.contextPath}/style/blue/images/pageSelector/lastPage.png"/></a>
-		
-		转到：
-		<input onFocus="this.select();" maxlength="3" class="inputStyle" type="text" value="1" id="pn"/>
-		<input type="submit" value="Go" class="MiddleButtonStyle" />
-	</div>
-</div>
+	<%@ include file="/WEB-INF/jsp/public/pageView.jspf" %>
+		<script type="text/javascript">
+				function gotoPage(num) {
+					var test = "forumAction_show.action?id=${id}&pageNum="
+							+ num;
+					//alert(test);
+					window.location = test;
 
+				}
+			</script>
 <div class="Description">
 	说明：<br />
 	1，主题默认按最后更新的时间降序排列。最后更新时间是指主题最后回复的时间，如果没有回复，就是主题发表的时间。<br />

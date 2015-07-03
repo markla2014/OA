@@ -19,13 +19,6 @@ import com.opensymphony.xwork2.ActionContext;
 @Scope("prototype")
 public class TopicAction extends BaseAction<Topic> {
 private Long forumId;
-private int pageNum=1;
-	 public int getPageNum() {
-	return pageNum;
-}
-public void setPageNum(int pageNum) {
-	this.pageNum = pageNum;
-}
 	public String show() throws Exception{
 		 Topic topic=topicService.getById(model.getId());
 		 ActionContext.getContext().put("topic",topic);

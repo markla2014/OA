@@ -8,13 +8,14 @@ import org.springframework.stereotype.Controller;
 import cn.itcast.oa.base.BaseAction;
 import cn.itcast.oa.domain.Forum;
 import cn.itcast.oa.domain.Topic;
+import cn.itcast.oa.util.PageBean;
 
 import com.opensymphony.xwork2.ActionContext;
 @Controller
 @Scope("prototype")
 public class ForumAction extends BaseAction<Forum> {
 
- public String list() throws Exception{
+public String list() throws Exception{
   List<Forum> forumList=forumService.findAll();
   ActionContext.getContext().put("forumList", forumList);
 	 return "list";
@@ -24,9 +25,11 @@ public class ForumAction extends BaseAction<Forum> {
 	 Forum forum=forumService.getById(model.getId());
 	 ActionContext.getContext().put("forum",forum);
 			 //准备数据
-	 List<Topic> topicList=topicService.findByForum(forum);
-	 ActionContext.getContext().put("topicList",topicList);
-	return "show";
+//	 List<Topic> topicList=topicService.findByForum(forum);
+//	 ActionContext.getContext().put("topicList",topicList);
+	 PageBean pageBean=topicService.getPageBean(pageNum,forum);
+	 ActionContext.getContext().getValueStack().push(pageBean);
+	 return "show";
 	 
  }
 }

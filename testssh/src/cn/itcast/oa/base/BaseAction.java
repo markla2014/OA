@@ -32,6 +32,15 @@ public abstract class BaseAction<T> extends ActionSupport implements ModelDriven
      @Resource 
      protected ReplyService replyServce;
 	protected T model;
+	protected int pageNum=1;
+
+	 public int getPageNum() {
+		return pageNum;
+	}
+
+	public void setPageNum(int pageNum) {
+		this.pageNum = pageNum;
+	}
 
 	@SuppressWarnings("unchecked")
 	public BaseAction() {
