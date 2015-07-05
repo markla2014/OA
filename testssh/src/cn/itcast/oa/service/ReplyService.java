@@ -10,7 +10,7 @@ import cn.itcast.oa.util.PageBean;
 public interface ReplyService extends BaseDao<Reply> {
    @Deprecated
 	List<Reply> findByTopic(Topic topic);
-
+   @Deprecated
 	PageBean getPageBean(int pageNum, Topic topic);
 
 }

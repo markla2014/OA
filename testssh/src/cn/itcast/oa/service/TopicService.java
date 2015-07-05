@@ -10,7 +10,7 @@ import cn.itcast.oa.util.PageBean;
 public interface TopicService extends BaseDao<Topic> {
        @Deprecated
 	List<Topic> findByForum(Forum forum);
-
+    @Deprecated
 	PageBean getPageBean(int pageNum, Forum forum);
 
 }

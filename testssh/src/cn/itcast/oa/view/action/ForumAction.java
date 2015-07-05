@@ -15,6 +15,37 @@ import com.opensymphony.xwork2.ActionContext;
 @Scope("prototype")
 public class ForumAction extends BaseAction<Forum> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -974317659327175339L;
+	private int viewType=0;
+	private int orderBy=0;
+	private int asc=0;
+public int getOrderBy() {
+		return orderBy;
+	}
+
+	public void setOrderBy(int orderBy) {
+		this.orderBy = orderBy;
+	}
+
+	public int getAsc() {
+		return asc;
+	}
+
+	public void setAsc(int asc) {
+		this.asc = asc;
+	}
+
+public int getViewType() {
+		return viewType;
+	}
+
+	public void setViewType(int viewType) {
+		this.viewType = viewType;
+	}
+
 public String list() throws Exception{
   List<Forum> forumList=forumService.findAll();
   ActionContext.getContext().put("forumList", forumList);
@@ -27,7 +58,18 @@ public String list() throws Exception{
 			 //准备数据
 //	 List<Topic> topicList=topicService.findByForum(forum);
 //	 ActionContext.getContext().put("topicList",topicList);
-	 PageBean pageBean=topicService.getPageBean(pageNum,forum);
+	//使用独立方法
+//	 PageBean pageBean=topicService.getPageBean(pageNum,forum);
+//	 ActionContext.getContext().getValueStack().push(pageBean);
+	 //使用工哦方法
+//	 String hql="From Topic t where t.forum=? order by (CASE t.type WHEN 2 THEN 2 ELSE 0 END) desc,t.lastUpdateTime desc";
+//	 Object[] parameters=new Object[]{forum};
+//	 PageBean pageBean=replyServce.getPageBean(pageNum,hql,parameters);
+//	 ActionContext.getContext().getValueStack().push(pageBean);
+	 String hql="From Topic t where t.forum=?";
+	 		hql+= "order by (CASE t.type WHEN 2 THEN 2 ELSE 0 END) desc,t.lastUpdateTime desc";
+	 Object[] parameters=new Object[]{forum,Topic.TYPE_BEST};
+	 PageBean pageBean=replyServce.getPageBean(pageNum,hql,parameters);
 	 ActionContext.getContext().getValueStack().push(pageBean);
 	 return "show";
 	 

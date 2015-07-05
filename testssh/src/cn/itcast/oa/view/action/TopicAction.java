@@ -25,7 +25,11 @@ private Long forumId;
 		/* List<Reply> replyList=replyServce.findByTopic(topic);
 		 ActionContext.getContext().put("replyList",replyList);*/
 
-		 PageBean pageBean=replyServce.getPageBean(pageNum,topic);
+//		 PageBean pageBean=replyServce.getPageBean(pageNum,topic);
+//		 ActionContext.getContext().getValueStack().push(pageBean);
+		 String hql="from Reply r where r.topic=? order by r.postTime Asc";
+		 Object[] parameters=new Object[]{topic};
+		 PageBean pageBean=replyServce.getPageBean(pageNum,hql,parameters);
 		 ActionContext.getContext().getValueStack().push(pageBean);
 		return "show";
 		 

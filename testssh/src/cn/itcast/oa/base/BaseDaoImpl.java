@@ -6,9 +6,13 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
+
+import cn.itcast.oa.cfg.Configuration;
+import cn.itcast.oa.util.PageBean;
 
 // @Transactional注解可以被继承，即对子类也有效
 @Transactional
@@ -71,6 +75,31 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 	 */
 	protected Session getSession() {
 		return sessionFactory.getCurrentSession();
+	}
+
+	@Override
+	public PageBean getPageBean(int pageNum, String queryListSql,
+			Object[] parameters) {
+		int pageSize = Configuration.getPageSize();
+		Query listQuery=getSession().createQuery(queryListSql);
+		if(parameters!=null&&parameters.length>0){
+			for(int i=0;i<parameters.length;i++){
+				listQuery.setParameter(i,parameters[i]);
+			}
+		}
+		listQuery.setFirstResult((pageNum-1)*pageSize);
+		listQuery.setMaxResults(pageSize);
+		@SuppressWarnings("rawtypes")
+		List list = listQuery.list();
+       Query countQuery=getSession().createQuery("select count(*) "+queryListSql);
+   	if(parameters!=null&&parameters.length>0){
+		for(int i=0;i<parameters.length;i++){
+			countQuery.setParameter(i,parameters[i]);
+		}
+	}
+		long count = (long)countQuery.uniqueResult();
+		//(int)count=count.intValue()
+		return new PageBean(pageNum, pageSize, list, (int)count);
 	}
 
 }
