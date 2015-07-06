@@ -1,5 +1,6 @@
 package cn.itcast.oa.view.action;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.context.annotation.Scope;
@@ -21,7 +22,7 @@ public class ForumAction extends BaseAction<Forum> {
 	private static final long serialVersionUID = -974317659327175339L;
 	private int viewType=0;
 	private int orderBy=0;
-	private int asc=0;
+	private boolean asc=true;
 public int getOrderBy() {
 		return orderBy;
 	}
@@ -30,13 +31,11 @@ public int getOrderBy() {
 		this.orderBy = orderBy;
 	}
 
-	public int getAsc() {
-		return asc;
-	}
-
-	public void setAsc(int asc) {
+	public void setAsc(boolean asc) {
 		this.asc = asc;
 	}
+
+
 
 public int getViewType() {
 		return viewType;
@@ -66,10 +65,24 @@ public String list() throws Exception{
 //	 Object[] parameters=new Object[]{forum};
 //	 PageBean pageBean=replyServce.getPageBean(pageNum,hql,parameters);
 //	 ActionContext.getContext().getValueStack().push(pageBean);
+	 List<Object> parameters=new ArrayList<Object>();
 	 String hql="From Topic t where t.forum=?";
-	 		hql+= "order by (CASE t.type WHEN 2 THEN 2 ELSE 0 END) desc,t.lastUpdateTime desc";
-	 Object[] parameters=new Object[]{forum,Topic.TYPE_BEST};
-	 PageBean pageBean=replyServce.getPageBean(pageNum,hql,parameters);
+	 parameters.add(forum);
+	 if(viewType==1){
+		 hql+=" and t.type=? ";
+		 parameters.add(Topic.TYPE_BEST);
+	 }
+	 if(orderBy==0){
+			hql+= " order by (CASE t.type WHEN 2 THEN 2 ELSE 0 END) desc,t.lastUpdateTime desc";
+	 }else if(orderBy==1){
+		 hql+= " order by t.lastUpdateTime"+(asc ?" ASC":" Desc");
+	 }else if(orderBy==2){
+		 hql+=" order by t.postTime"+(asc ?" ASC":" Desc");
+	 }else if(orderBy==3){
+		 hql+=" order by t.replyCount"+(asc ?" ASC":" Desc");
+	 }
+	 	
+	 PageBean pageBean=replyServce.getPageBean(pageNum,hql,parameters.toArray());
 	 ActionContext.getContext().getValueStack().push(pageBean);
 	 return "show";
 	 

@@ -212,14 +212,16 @@
 			</div>
 
 			<!--分页信息-->
+			<s:form action="topicAction_show.action?id=%{id}"></s:form>
 			<%@ include file="/WEB-INF/jsp/public/pageView.jspf" %>
 			<script type="text/javascript">
-				function gotoPage(num) {
-					var test = "topicAction_show.action?id=${id}&pageNum="
-							+ num;
+				function gotoPage(pageNum) {
+					//var test = "topicAction_show.action?id=${id}&pageNum="+ num;
 					//alert(test);
-					window.location = test;
-
+					//window.location = test;
+var test="<input type='hidden' name='pageNum' value='"+pageNum+"'/>";
+			  $(document.forms[0]).append(test);
+              document.forms[0].submit();
 				}
 			</script>
 			<div class="ForumPageTableBorder" style="margin-top: 25px;">
