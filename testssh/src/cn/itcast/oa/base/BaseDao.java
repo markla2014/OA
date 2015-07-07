@@ -2,6 +2,9 @@ package cn.itcast.oa.base;
 
 import java.util.List;
 
+import cn.itcast.oa.util.HqlHelper;
+import cn.itcast.oa.util.PageBean;
+
 public interface BaseDao<T> {
 
 	/**
@@ -42,9 +45,13 @@ public interface BaseDao<T> {
 	List<T> getByIds(Long[] ids);
 
 	/**
-	 * 查询所有
-	 * 
+	 * 公用的查询分页信息的方法
+	 * @param pageNum
+	 * @param queryListSql 查询list 的 hsql 语句
 	 * @return
 	 */
 	List<T> findAll();
+	@Deprecated
+	PageBean getPageBean(int pageNum,String queryListSql,Object[] parameters);
+	PageBean getPageBean(int pageNum, HqlHelper hqlHelper);
 }

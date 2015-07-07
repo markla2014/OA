@@ -1,9 +1,5 @@
-/.struts.mex
-/applicationContext.xml
-/cn
-/hibernate.cfg.xml
-/jdbc.properties
-/log4j.properties
+/cn/
+/test.class
+/Configuration.class
 /org
-/struts.xml
 /template

@@ -60,6 +60,7 @@
 		<action name="userAction_*" class="userAction" method="{1}">
 			<result name="list">/WEB-INF/jsp/userAction/list.jsp</result>
 			<result name="saveUI">/WEB-INF/jsp/userAction/saveUI.jsp</result>
+			<result name="errorSaveUI" type="redirectAction">userAction_addUI?errorMessage=${warning}</result>
 			<result name="toList" type="redirectAction">userAction_list</result>
 
 			<result name="logout">/WEB-INF/jsp/userAction/logout.jsp</result>

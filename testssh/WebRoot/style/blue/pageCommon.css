@@ -537,6 +537,7 @@ A.OpenWinLink:hover {
 	color: #004779;
 	width: 100%;
 	border: none;
+	
 }
 
 #PageSelectorMax {
@@ -546,6 +547,7 @@ A.OpenWinLink:hover {
 	color: #FF0000;
 	font-family: 宋体;
 	padding-left: 26px;
+	 border-collapse: collapse;
 }
 
 #PageSelectorBar {
@@ -1049,6 +1051,7 @@ td.tsubmitBtnTD{
 	margin-left: 50px;
 	width: 80%;
 	border: none;
+	border-collapse:collapse;
 }
 
 .red{

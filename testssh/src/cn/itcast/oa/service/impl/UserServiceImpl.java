@@ -25,4 +25,18 @@ public class UserServiceImpl extends BaseDaoImpl<User> implements UserService {
 
 	}
 
+	@Override
+	public boolean findByUserName(String loginName) {
+		int userSize=getSession().createQuery("from User a where a.loginName=?")
+				.setParameter(0, loginName).list().size();
+		if(userSize>0){
+			return true;
+		}else{
+			return false;
+		}
+		
+		
+		
+	}
+
 }

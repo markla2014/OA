@@ -168,12 +168,13 @@ A.Default {
 }
 
 .TopicFunc {
-	color: #004a7d;
-	font-size: 12px;
-	margin: 0px;
-	height: 20px;
-	border-bottom: 1px dashed #958f88;
-	width: 98%;
+	  color: #004a7d;
+  font-size: 12px;
+  margin: 0px;
+  text-align: left;
+  height: 20px;
+  border-bottom: 1px dashed #958f88;
+  width: 92%;
 }
 
 .TopicFuncLi {
@@ -183,7 +184,7 @@ A.Default {
 
 .Content {
 	width: 98%;
-	height: 100px;
+	height: 100%;
 	padding: 10px;
 	text-align: justify;
 }

@@ -1,7 +1,9 @@
 package cn.itcast.oa.view.action;
 
 import java.util.Date;
+
 import cn.itcast.oa.util.*;
+
 import java.util.List;
 
 import org.apache.struts2.ServletActionContext;
@@ -19,12 +21,25 @@ import com.opensymphony.xwork2.ActionContext;
 @Scope("prototype")
 public class TopicAction extends BaseAction<Topic> {
 private Long forumId;
-
-	 public String show() throws Exception{
+	public String show() throws Exception{
 		 Topic topic=topicService.getById(model.getId());
 		 ActionContext.getContext().put("topic",topic);
-		 List<Reply> replyList=replyServce.findByTopic(topic);
-		 ActionContext.getContext().put("replyList",replyList);
+		/* List<Reply> replyList=replyServce.findByTopic(topic);
+		 ActionContext.getContext().put("replyList",replyList);*/
+
+//		 PageBean pageBean=replyServce.getPageBean(pageNum,topic);
+//		 ActionContext.getContext().getValueStack().push(pageBean);
+		 /** 直接注入
+		 String hql="from Reply r where r.topic=? order by r.postTime Asc";
+		 Object[] parameters=new Object[]{topic};
+		 PageBean pageBean=replyServce.getPageBean(pageNum,hql,parameters);
+		 **/
+		 HqlHelper hqlHelper=new HqlHelper(Reply.class,"r")
+		   .addWhereCondiction("r.topic=?",topic)
+		   .addOrder("r.postTime",true)
+		   .buildPageBeanStructs(pageNum,replyServce);
+//		 PageBean pageBean=replyServce.getPageBean(pageNum,hqlHelper);
+//		 ActionContext.getContext().getValueStack().push(pageBean);
 		return "show";
 		 
 	 }
