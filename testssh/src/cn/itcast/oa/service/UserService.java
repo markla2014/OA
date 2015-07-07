@@ -7,4 +7,6 @@ public interface UserService extends BaseDao<User> {
 
 	User getByloginNameAndPassword(String loginName, String password);
 
+	boolean findByUserName(String loginName);
+
 }

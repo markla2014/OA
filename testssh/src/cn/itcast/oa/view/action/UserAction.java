@@ -11,6 +11,7 @@ import cn.itcast.oa.base.BaseAction;
 import cn.itcast.oa.domain.Department;
 import cn.itcast.oa.domain.Role;
 import cn.itcast.oa.domain.User;
+import cn.itcast.oa.util.HqlHelper;
 
 import com.opensymphony.xwork2.ActionContext;
 
@@ -20,11 +21,20 @@ public class UserAction extends BaseAction<User> {
 
 	private Long departmentId;
 	private Long[] roleIds;
+	private String errorMessage; 
+	public String getErrorMessage() {
+		return errorMessage;
+	}
+
+	public void setErrorMessage(String errorMessage) {
+		this.errorMessage = errorMessage;
+	}
 
 	/** 列表 */
 	public String list() throws Exception {
-		List<User> userList = userService.findAll();
-		ActionContext.getContext().put("userList", userList);
+//		List<User> userList = userService.findAll();
+//		ActionContext.getContext().put("userList", userList);
+		new HqlHelper(User.class).buildPageBeanStructs(pageNum, userService);
 		return "list";
 	}
 
@@ -38,6 +48,9 @@ public class UserAction extends BaseAction<User> {
 	public String addUI() throws Exception {
 		// 准备数据：departmentList
 		// TODO 应是显示树状结构，先使用所有的部门列表代替
+		if(errorMessage!=null){
+			ActionContext.getContext().put("warning",errorMessage);
+		}
 		List<Department> departmentList = departmentService.findAll();
 		ActionContext.getContext().put("departmentList", departmentList);
 
@@ -51,9 +64,14 @@ public class UserAction extends BaseAction<User> {
 	/** 添加 */
 	public String add() throws Exception {
 		// 1，新建对象并设置属性（也可以使用model）
+		String message="";
 		Department department = departmentService.getById(departmentId);
 		model.setDepartment(department);
-
+        if(userService.findByUserName(model.getLoginName())){
+        	message="login name already exist";
+            ActionContext.getContext().put("warning",message);	
+            return "errorSaveUI";
+        }else{
 		List<Role> roleList = roleService.getByIds(roleIds);
 		model.setRoles(new HashSet<Role>(roleList));
 
@@ -62,6 +80,7 @@ public class UserAction extends BaseAction<User> {
 
 		// 2，保存到数据库
 		userService.save(model);
+        }
 
 		return "toList";
 	}

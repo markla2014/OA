@@ -22,5 +22,7 @@ public class HsqlHelperTest {
 			.addOrder(orderBy==1,"t.lastUpdateTime",asc)
 				.addOrder(orderBy==2,"t.postTime",asc)
 				.addOrder(orderBy==3,"t.replyCount",asc);
+		 System.out.println(hqlHelper.getHsql());
+		 System.out.println(hqlHelper.getParameters());
   }
 }

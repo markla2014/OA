@@ -44,8 +44,11 @@
                     </tr>
                     <tr><td>登录名</td>
                         <td><s:textfield name="loginName" cssClass="InputStyle"/> *
-							（登录名要唯一）
+							 <s:if test="#warning!=null">
+					     ${warning}
+					  </s:if>
 						</td>
+					 
                     </tr>
                     <tr><td>姓名</td>
                         <td><s:textfield name="name" cssClass="InputStyle"/> *</td>

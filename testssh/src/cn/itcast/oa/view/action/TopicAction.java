@@ -1,7 +1,9 @@
 package cn.itcast.oa.view.action;
 
 import java.util.Date;
+
 import cn.itcast.oa.util.*;
+
 import java.util.List;
 
 import org.apache.struts2.ServletActionContext;
@@ -27,10 +29,17 @@ private Long forumId;
 
 //		 PageBean pageBean=replyServce.getPageBean(pageNum,topic);
 //		 ActionContext.getContext().getValueStack().push(pageBean);
+		 /** 直接注入
 		 String hql="from Reply r where r.topic=? order by r.postTime Asc";
 		 Object[] parameters=new Object[]{topic};
 		 PageBean pageBean=replyServce.getPageBean(pageNum,hql,parameters);
-		 ActionContext.getContext().getValueStack().push(pageBean);
+		 **/
+		 HqlHelper hqlHelper=new HqlHelper(Reply.class,"r")
+		   .addWhereCondiction("r.topic=?",topic)
+		   .addOrder("r.postTime",true)
+		   .buildPageBeanStructs(pageNum,replyServce);
+//		 PageBean pageBean=replyServce.getPageBean(pageNum,hqlHelper);
+//		 ActionContext.getContext().getValueStack().push(pageBean);
 		return "show";
 		 
 	 }

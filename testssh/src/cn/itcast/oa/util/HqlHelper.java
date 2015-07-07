@@ -3,17 +3,23 @@ package cn.itcast.oa.util;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.opensymphony.xwork2.ActionContext;
+
+import cn.itcast.oa.base.BaseDao;
+
 public class HqlHelper {
 
-	private String fromClause;
-	private String whereClause;
-	private String orderClause;
+	private String fromClause="";
+	private String whereClause="";
+	private String orderClause="";
 	private List<Object> parameters=new ArrayList();
 	
 	public HqlHelper(Class clazz, String alias){
-		this.fromClause="From"+clazz.getSimpleName()+" "+alias;
+		this.fromClause="From "+clazz.getSimpleName()+" "+alias;
 	}
-	
+	public HqlHelper(Class clazz){
+		this.fromClause="From "+clazz.getSimpleName()+" o";
+	}
 	public HqlHelper addWhereCondiction(String condiction,Object... params){
 		if(whereClause.length()==0){
 			whereClause=" where "+condiction;
@@ -43,7 +49,9 @@ public HqlHelper addWhereCondiction(boolean append,String condiction,Object... p
 
 	public HqlHelper addOrder(String perportyName,boolean isAsc){
 		if(orderClause.length()==0){
-			orderClause=" ORDER BY ";
+			orderClause=" ORDER BY "+perportyName+(isAsc?" asc":" desc");
+		}else{
+			orderClause+=", "+perportyName+(isAsc?" asc":" desc");
 		}
 		return this;
 	}
@@ -63,6 +71,22 @@ public HqlHelper addOrder(boolean append,String perportyName,boolean isAsc){
 
 	public void setParameters(List<Object> parameters) {
 		this.parameters = parameters;
+	}
+	
+	public String getCount(){
+		return "select count(*) "+fromClause+whereClause;
+	}
+	/**
+	 *  准备到页面去
+	 * 查询分页信息放到站定
+	 */
+
+	public HqlHelper buildPageBeanStructs(int pageNum,BaseDao<?> service) {
+		// TODO Auto-generated method stub
+		PageBean pageBean=service.getPageBean(pageNum, this);
+		ActionContext.getContext().getValueStack().push(pageBean);
+		return this;
+		
 	}
 	
 }
