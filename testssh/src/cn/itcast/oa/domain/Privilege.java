@@ -17,6 +17,16 @@ public class Privilege implements Serializable {
  private Set<Role> roles=new HashSet<Role>();
  private Privilege parent;
  private Set<Privilege> children=new HashSet<Privilege>();
+ public Privilege() {
+	}
+
+	public Privilege(String name, String url, String icon, Privilege parent) {
+		this.url = url;
+		this.name = name;
+		this.icon = icon;
+		this.parent = parent;
+	}
+
 public Long getId() {
 	return id;
 }
