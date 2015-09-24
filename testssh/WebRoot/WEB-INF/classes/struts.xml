@@ -60,7 +60,8 @@
 		<action name="userAction_*" class="userAction" method="{1}">
 			<result name="list">/WEB-INF/jsp/userAction/list.jsp</result>
 			<result name="saveUI">/WEB-INF/jsp/userAction/saveUI.jsp</result>
-			<result name="errorSaveUI" type="redirectAction">userAction_addUI?errorMessage=${warning}</result>
+			<result name="errorSaveUI" type="redirectAction">userAction_addUI?errorMessage=${warning}
+			</result>
 			<result name="toList" type="redirectAction">userAction_list</result>
 
 			<result name="logout">/WEB-INF/jsp/userAction/logout.jsp</result>
@@ -87,15 +88,29 @@
 			<result name="show">/WEB-INF/jsp/forumAction/show.jsp</result>
 		</action>
 		<action name="topicAction_*" class="topicAction" method="{1}">
-	    <result name="show">/WEB-INF/jsp/topicAction/show.jsp</result>
-		<result name="addUI">/WEB-INF/jsp/topicAction/addUI.jsp</result>
-		<result name="toTopicShow"  type="redirectAction">topicAction_show?id=${id}</result>
+			<result name="show">/WEB-INF/jsp/topicAction/show.jsp</result>
+			<result name="addUI">/WEB-INF/jsp/topicAction/addUI.jsp</result>
+			<result name="toTopicShow" type="redirectAction">topicAction_show?id=${id}
+			</result>
 		</action>
 		<action name="replyAction_*" class="replyAction" method="{1}">
-				<result name="addUI">/WEB-INF/jsp/replyAction/addUI.jsp</result>
-		<result name="toTopicShow" type="redirectAction">topicAction_show?id=${topicId}</result>
+			<result name="addUI">/WEB-INF/jsp/replyAction/addUI.jsp</result>
+			<result name="toTopicShow" type="redirectAction">topicAction_show?id=${topicId}
+			</result>
 		</action>
- 
-</package>
+		<action name="processDefinitionAction_*" class="processDefinitionAction"
+			method="{1}">
+			<result name="list">/WEB-INF/jsp/processDefinitionAction/list.jsp
+			</result>
+			<result name="addUI">/WEB-INF/jsp/processDefinitionAction/addUI.jsp
+			</result>
+			<result name="toList" type="redirectAction">processDefinitionAction_list
+			</result>
+			<result name="downloadProcessImage" type="stream">
+				<param name="contentType">image/png</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+	</package>
 </struts>
 

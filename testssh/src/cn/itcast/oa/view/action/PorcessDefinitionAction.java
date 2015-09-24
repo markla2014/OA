@@ -19,6 +19,19 @@ import cn.itcast.oa.base.BaseAction;
 public class PorcessDefinitionAction extends BaseAction{
 	private File upload;//临时文件
 	private String id;
+	private InputStream inputStream;
+	private String key;
+	
+	/*
+	 * frontpage transition data
+	 */
+	   public String getKey() {
+			return key;
+		}
+
+		public void setKey(String key) {
+			this.key = key;
+		}
 	public String getId() {
 		return id;
 	}
@@ -34,8 +47,7 @@ public class PorcessDefinitionAction extends BaseAction{
 	public void setUpload(File upload) {
 		this.upload = upload;
 	}
-	private InputStream inputStream;
-	private String key;
+
 
       public InputStream getInputStream() {
 		return inputStream;
@@ -44,7 +56,9 @@ public class PorcessDefinitionAction extends BaseAction{
 	public void setInputStream(InputStream inputStream) {
 		this.inputStream = inputStream;
 	}
-
+/*
+ *##########################################################################333
+ */
 	public String list() throws Exception{
 		List<ProcessDefinition> processDefinitionList=processDefinitionService.findAlllLastestVersion();
 		ActionContext.getContext().put("processDefinitionList", processDefinitionList);
@@ -62,13 +76,7 @@ public class PorcessDefinitionAction extends BaseAction{
     	  }
     	  return "toList";
       }
-      public String getKey() {
-		return key;
-	}
-
-	public void setKey(String key) {
-		this.key = key;
-	}
+   
 
 	public String addUI() throws Exception{
     	  
