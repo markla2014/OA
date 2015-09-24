@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import cn.itcast.oa.base.BaseAction;
+import cn.itcast.oa.base.ModelDriverBaseAction;
 import cn.itcast.oa.domain.Privilege;
 import cn.itcast.oa.domain.Role;
 
@@ -14,7 +15,7 @@ import com.opensymphony.xwork2.ActionContext;
 
 @Controller
 @Scope("prototype")
-public class RoleAction extends BaseAction<Role> {
+public class RoleAction extends ModelDriverBaseAction<Role> {
 	private Long[] privilegeIds;
 
 	/**

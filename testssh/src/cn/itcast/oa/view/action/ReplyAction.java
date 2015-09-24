@@ -9,12 +9,13 @@ import org.springframework.stereotype.Controller;
 import com.opensymphony.xwork2.ActionContext;
 
 import cn.itcast.oa.base.BaseAction;
+import cn.itcast.oa.base.ModelDriverBaseAction;
 import cn.itcast.oa.domain.Reply;
 import cn.itcast.oa.domain.Topic;
 import cn.itcast.oa.util.CommonUtil;
 @Controller
 @Scope("prototype")
-public class ReplyAction extends BaseAction<Reply>{
+public class ReplyAction extends ModelDriverBaseAction<Reply>{
 
 	/**
 	 * 

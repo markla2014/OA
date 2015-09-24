@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import cn.itcast.oa.base.BaseAction;
+import cn.itcast.oa.base.ModelDriverBaseAction;
 import cn.itcast.oa.domain.Forum;
 import cn.itcast.oa.domain.Reply;
 import cn.itcast.oa.domain.Topic;
@@ -19,7 +20,7 @@ import cn.itcast.oa.domain.User;
 import com.opensymphony.xwork2.ActionContext;
 @Controller
 @Scope("prototype")
-public class TopicAction extends BaseAction<Topic> {
+public class TopicAction extends ModelDriverBaseAction<Topic> {
 private Long forumId;
 	public String show() throws Exception{
 		 Topic topic=topicService.getById(model.getId());

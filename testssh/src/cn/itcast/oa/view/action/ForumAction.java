@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import cn.itcast.oa.base.BaseAction;
+import cn.itcast.oa.base.ModelDriverBaseAction;
 import cn.itcast.oa.domain.Forum;
 import cn.itcast.oa.domain.Topic;
 import cn.itcast.oa.service.ReplyService;
@@ -16,7 +17,7 @@ import cn.itcast.oa.util.PageBean;
 import com.opensymphony.xwork2.ActionContext;
 @Controller
 @Scope("prototype")
-public class ForumAction extends BaseAction<Forum> {
+public class ForumAction extends ModelDriverBaseAction<Forum> {
 
 	/**
 	 * 
