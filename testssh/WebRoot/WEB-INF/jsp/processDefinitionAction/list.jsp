@@ -62,7 +62,7 @@
 						<td align="CENTER">${version}&nbsp;</td>
 						<td>${description}&nbsp;</td>
 						<td><s:a action="processDefinitionAction_delete" onclick="return delConfirm()">
-						<s:param name="key" value="%{@java.net.URLEncoder@encode(key,'utf-8')}"></s:param>  
+						<s:param name="key" value="%{encoding(key)}"></s:param>  
 						删除
 					</s:a>
 					 <a href="javascript: showProcessImage('${id}')">查看流程图</a></td>
