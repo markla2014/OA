@@ -5,11 +5,13 @@
 
 <struts>
 	<!-- 配置为开发模式 -->
-	<constant name="struts.devMode" value="false" />
+	<constant name="struts.devMode" value="true" />
 	<!-- 配置扩展名为action -->
 	<constant name="struts.action.extension" value="action" />
 	<!-- 配置主题 -->
 	<constant name="struts.ui.theme" value="simple" />
+	<!-- 在ognl 表达式中是否允许访问静态方法 -->
+	<constant name="struts.ognl.allowStaticMethodAccess" value="true"/> 
 	<!-- 可以配置命名空间 -->
 	<package name="default" namespace="/" extends="struts-default">
 		<interceptors>
@@ -98,7 +100,7 @@
 			<result name="toTopicShow" type="redirectAction">topicAction_show?id=${topicId}
 			</result>
 		</action>
-		<action name="processDefinitionAction_*" class="processDefinitionAction"
+		<action name="processDefinitionAction_*" class="porcessDefinitionAction"
 			method="{1}">
 			<result name="list">/WEB-INF/jsp/processDefinitionAction/list.jsp
 			</result>

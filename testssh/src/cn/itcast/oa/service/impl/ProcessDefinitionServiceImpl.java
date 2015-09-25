@@ -43,7 +43,7 @@ public class ProcessDefinitionServiceImpl implements ProcessDefinitionService {
 		List<ProcessDefinition> list=processEngine.getRepositoryService()
 				.createProcessDefinitionQuery().processDefinitionKey(key).list();
        for(ProcessDefinition pd:list){
-		processEngine.getRepositoryService().deleteDeployment(pd.getId());
+		processEngine.getRepositoryService().deleteDeployment(pd.getDeploymentId(), true);
        }
 	}
 

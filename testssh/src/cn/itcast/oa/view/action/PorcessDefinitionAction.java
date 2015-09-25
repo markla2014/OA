@@ -3,6 +3,7 @@ package cn.itcast.oa.view.action;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.net.URLDecoder;
 import java.util.List;
 import java.util.zip.ZipInputStream;
 
@@ -83,11 +84,13 @@ public class PorcessDefinitionAction extends BaseAction{
     	  return "addUI";
       }
       public String delete() throws Exception{
+    	  key=new String(key.getBytes("iso8859-1"),"utf-8"); //修改配置
+    	 // 修改tomcat
     	  processDefinitionService.deleteByKey(key);
     	  return "toList";
       }
-      public String showProcessImage() throws Exception{
-    
+      public String downloadProcessImage() throws Exception{
+             URLDecoder.decode(id,"utf-8");//自己进行再一次解码
 		inputStream=processDefinitionService.getPorcessImageResourceAsStream(id);
     	  return "downloadProcessImage";
       }
