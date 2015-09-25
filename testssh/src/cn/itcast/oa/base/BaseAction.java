@@ -2,6 +2,7 @@ package cn.itcast.oa.base;
 
 import javax.annotation.Resource;
 
+import cn.itcast.oa.service.ApplicationTemplateService;
 import cn.itcast.oa.service.DepartmentService;
 import cn.itcast.oa.service.ForumService;
 import cn.itcast.oa.service.PrivilegeService;
@@ -30,6 +31,8 @@ public class BaseAction extends ActionSupport {
      protected ReplyService replyServce;
      @Resource
      protected ProcessDefinitionService processDefinitionService;
+     @Resource
+     protected ApplicationTemplateService applicationTemplateService;
 
 	protected int pageNum=1;
 
