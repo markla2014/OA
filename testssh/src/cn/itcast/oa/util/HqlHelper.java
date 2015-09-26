@@ -88,5 +88,54 @@ public HqlHelper addOrder(boolean append,String perportyName,boolean isAsc){
 		return this;
 		
 	}
-	
+	/**
+	 * 如果第1个参数为true，则拼接Where子句
+	 * 
+	 * @param append
+	 * @param condition
+	 * @param params
+	 */
+	public HqlHelper addCondition(boolean append, String condition, Object... params) {
+		if (append) {
+			addCondition(condition, params);
+		}
+		return this;
+	}
+	/**
+	 * 拼接Where子句
+	 * 
+	 * @param condition
+	 * @param params
+	 */
+	public HqlHelper addCondition(String condition, Object... params) {
+		// 拼接
+		if (whereClause.length() == 0) {
+			whereClause = " WHERE " + condition;
+		} else {
+			whereClause += " AND " + condition;
+		}
+
+		// 保存参数
+		if (params != null && params.length > 0) {
+			for (Object obj : params) {
+				parameters.add(obj);
+			}
+		}
+
+		return this;
+	}
+	/**
+	 * 查询并准备分页信息（放到栈顶）
+	 * 
+	 * @param pageNum
+	 * @param service
+	 * @return
+	 */
+	public HqlHelper buildPageBeanForStruts2(int pageNum, BaseDao<?> service) {
+		System.out.println("===> HqlHelper.buildPageBeanForStruts2()");
+		
+		PageBean pageBean = service.getPageBean(pageNum, this);
+		ActionContext.getContext().getValueStack().push(pageBean);
+		return this;
+	}
 }

@@ -93,7 +93,7 @@ public String list() throws Exception{
 			.addOrder(orderBy==1,"t.lastUpdateTime",asc)
 				.addOrder(orderBy==2,"t.postTime",asc)
 				.addOrder(orderBy==3,"t.replyCount",asc)
-		        .buildPageBeanStructs(pageNum,replyServce);
+		        .buildPageBeanStructs(pageNum,replyService);
 //	 PageBean pageBean=replyServce.getPageBean(pageNum, hqlHelper);
 //	 ActionContext.getContext().getValueStack().push(pageBean);
 	 return "show";

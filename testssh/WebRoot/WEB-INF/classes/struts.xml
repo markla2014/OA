@@ -11,7 +11,7 @@
 	<!-- 配置主题 -->
 	<constant name="struts.ui.theme" value="simple" />
 	<!-- 在ognl 表达式中是否允许访问静态方法 -->
-	<constant name="struts.ognl.allowStaticMethodAccess" value="true"/> 
+	<constant name="struts.ognl.allowStaticMethodAccess" value="true" />
 	<!-- 可以配置命名空间 -->
 	<package name="default" namespace="/" extends="struts-default">
 		<interceptors>
@@ -113,14 +113,34 @@
 				<param name="inputName">inputStream</param>
 			</result>
 		</action>
-		<action name="applicationTemplateAction_*" class="applicationTemplateAction" method="{1}">
-		<result name="list">/WEB-INF/jsp/applicationTemplateAction/list.jsp</result>
-	    <result name="addUI">/WEB-INF/jsp/applicationTemplateAction/addUI.jsp</result>
-			<result name="toList" type="redirectAction">applicationTemplateAction_list</result>
+		<action name="applicationTemplateAction_*" class="applicationTemplateAction"
+			method="{1}">
+			<result name="list">/WEB-INF/jsp/applicationTemplateAction/list.jsp
+			</result>
+			<result name="addUI">/WEB-INF/jsp/applicationTemplateAction/addUI.jsp
+			</result>
+			<result name="toList" type="redirectAction">applicationTemplateAction_list
+			</result>
 			<result name="download" type="stream">
 				<param name="contentType">image/octet-stream</param>
 				<param name="inputName">inputStream</param>
+				<param name="contentDisposition">attachment;filename="${#fileName}.doc"</param>
 			</result>
+			</action>
+			<action name="flowAction_*" class="flowAction" method="{1}">
+				<result name="applicationTemplateList">/WEB-INF/jsp/flowAction/applicationTemplateList.jsp
+				</result>
+				<result name="submitUI">/WEB-INF/jsp/flowAction/submitUI.jsp</result>
+				<result name="myApplicationList">/WEB-INF/jsp/flowAction/myApplicationList.jsp
+				</result>
+				<result name="toMyApplicationList" type="redirectAction">flowAction_myApplicationList
+				</result>
+				<result name="myTaskList">/WEB-INF/jsp/flowAction/myTaskList.jsp</result>
+				<result name="approveUI">/WEB-INF/jsp/flowAction/approveUI.jsp</result>
+				<result name="approveHistory">/WEB-INF/jsp/flowAction/approveHistory.jsp
+				</result>
+				<result name="toMyTaskList" type="redirectAction">flowAction_myTaskList
+				</result>
 			
 		</action>
 	</package>

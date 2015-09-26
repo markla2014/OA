@@ -34,7 +34,7 @@ public class ReplyAction extends ModelDriverBaseAction<Reply>{
 		model.setAuthor(new CommonUtil().getCurrentUser());
 		model.setPostTime(new Date());
 		model.setIpAddr(ServletActionContext.getRequest().getLocalAddr());
-		replyServce.save(model);
+		replyService.save(model);
 		return "toTopicShow";
 	}
 	public Long getTopicId() {

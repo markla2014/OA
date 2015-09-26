@@ -38,7 +38,7 @@ private Long forumId;
 		 HqlHelper hqlHelper=new HqlHelper(Reply.class,"r")
 		   .addWhereCondiction("r.topic=?",topic)
 		   .addOrder("r.postTime",true)
-		   .buildPageBeanStructs(pageNum,replyServce);
+		   .buildPageBeanStructs(pageNum,replyService);
 //		 PageBean pageBean=replyServce.getPageBean(pageNum,hqlHelper);
 //		 ActionContext.getContext().getValueStack().push(pageBean);
 		return "show";
