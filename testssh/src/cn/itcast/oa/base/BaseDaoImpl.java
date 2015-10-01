@@ -33,6 +33,9 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 	}
 
 	public void save(T entity) {
+		if(entity==null){
+			System.out.println("nothing to save");
+		}
 		getSession().save(entity);
 	}
 
