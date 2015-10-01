@@ -51,6 +51,7 @@ xmlns:context="http://www.springframework.org/schema/context"
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="configLocation" value="classpath:hibernate.cfg.xml"></property>
+		<property name="mappingLocations" value="classpath:cn/itcast/oa/domain/*.hbm.xml"/>
 	</bean>
 <!-- 配置声明式的事务管理（采用基于注解的方式） -->
 

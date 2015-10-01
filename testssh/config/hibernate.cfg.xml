@@ -18,7 +18,10 @@
 	<property name="show_sql">true</property>
 	<property name="hbm2ddl.auto">update</property>
 	<property name="javax.persistence.validation.mode">none</property>
-	<mapping resource="cn/itcast/oa/domain/User.hbm.xml" />
+
+	
+<!--
+  	<mapping resource="cn/itcast/oa/domain/User.hbm.xml" />
 	<mapping resource="cn/itcast/oa/domain/Role.hbm.xml" />
 	<mapping resource="cn/itcast/oa/domain/Department.hbm.xml" />
 	<mapping resource="cn/itcast/oa/domain/Privilege.hbm.xml" />
@@ -26,6 +29,7 @@
 	<mapping resource="cn/itcast/oa/domain/Topic.hbm.xml" />
 	<mapping resource="cn/itcast/oa/domain/Reply.hbm.xml" />
 	<mapping resource="cn/itcast/oa/domain/Article.hbm.xml" />
-	<mapping resource="cn/itcast/oa/domain/AppicationTemplate.hbm.xml"/>
+	<mapping resource="cn/itcast/oa/domain/AppicationTemplate.hbm.xml"/>-->
+	
 </session-factory>
 </hibernate-configuration>
